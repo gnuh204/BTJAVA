@@ -4,6 +4,7 @@
  */
 package packageapp;
 
+import FormHS.JPaneLB;
 import FormHS.JPanelBTHS;
 import FormHS.JPanelCN;
 
@@ -13,6 +14,7 @@ import FormHS.JPanelCN;
 public class HSForm extends javax.swing.JFrame {
     JPanelCN CNHS = new JPanelCN();
     JPanelBTHS BTHS = new JPanelBTHS();
+    JPaneLB LB = new JPaneLB();
     
     
   
@@ -20,9 +22,10 @@ public class HSForm extends javax.swing.JFrame {
         initComponents();
         jLayeredPaneFHS.add(CNHS);
         jLayeredPaneFHS.add(BTHS);
-       
+        jLayeredPaneFHS.add(LB);
         CNHS.setVisible(false);
         BTHS.setVisible(false);
+        LB.setVisible(true);
        
     }
 
@@ -42,7 +45,7 @@ public class HSForm extends javax.swing.JFrame {
         jLayeredPaneFHS = new javax.swing.JLayeredPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1250, 600));
+        setPreferredSize(new java.awt.Dimension(1270, 640));
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 255));
