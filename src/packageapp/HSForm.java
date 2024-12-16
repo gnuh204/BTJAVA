@@ -6,24 +6,24 @@ package packageapp;
 
 import FormHS.JPanelBTHS;
 import FormHS.JPanelCN;
-import FormHS.JPanelLB;
+
 
 
 
 public class HSForm extends javax.swing.JFrame {
     JPanelCN CNHS = new JPanelCN();
     JPanelBTHS BTHS = new JPanelBTHS();
-    JPanelLB LB = new JPanelLB();
+    
     
   
     public HSForm() {
         initComponents();
         jLayeredPaneFHS.add(CNHS);
         jLayeredPaneFHS.add(BTHS);
-        jLayeredPaneFHS.add(LB);
+       
         CNHS.setVisible(false);
         BTHS.setVisible(false);
-        LB.setVisible(true);
+       
     }
 
     @SuppressWarnings("unchecked")
