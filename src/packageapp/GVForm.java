@@ -31,8 +31,7 @@ public class GVForm extends javax.swing.JFrame {
         DSBT.setVisible(false);
         DSNHCH.setVisible(false);
         NHCH.setVisible(false);
-        
-        
+       
         DSNHCH.setButtonListener(e -> onButtonThemNHCH());
     }
 
@@ -450,7 +449,6 @@ public class GVForm extends javax.swing.JFrame {
     private void jLabelBTGVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBTGVMouseClicked
         TCPanel.setVisible(false);
         TThs.setVisible(false);
-    
         BT.setVisible(true);
         DSBT.setVisible(false);
         DSNHCH.setVisible(false);

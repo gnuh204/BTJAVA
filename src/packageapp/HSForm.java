@@ -7,6 +7,7 @@ package packageapp;
 import FormHS.JPaneLB;
 import FormHS.JPanelBTHS;
 import FormHS.JPanelCN;
+import FormHS.JPanelKT;
 
 
 
@@ -15,6 +16,8 @@ public class HSForm extends javax.swing.JFrame {
     JPanelCN CNHS = new JPanelCN();
     JPanelBTHS BTHS = new JPanelBTHS();
     JPaneLB LB = new JPaneLB();
+    JPanelKT KT = new JPanelKT();
+    
     
     
   
@@ -23,10 +26,11 @@ public class HSForm extends javax.swing.JFrame {
         jLayeredPaneFHS.add(CNHS);
         jLayeredPaneFHS.add(BTHS);
         jLayeredPaneFHS.add(LB);
-        CNHS.setVisible(false);
+        jLayeredPaneFHS.add(KT);
+        CNHS.setVisible(true);
         BTHS.setVisible(false);
-        LB.setVisible(true);
-       
+        LB.setVisible(false);
+        KT.setVisible(false);     
     }
 
     @SuppressWarnings("unchecked")
@@ -80,6 +84,11 @@ public class HSForm extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/account_icon.png"))); // NOI18N
         jLabel2.setText("Cá Nhân ");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -104,6 +113,11 @@ public class HSForm extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/document_icon.png"))); // NOI18N
         jLabel3.setText("Luyện thi");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -128,6 +142,11 @@ public class HSForm extends javax.swing.JFrame {
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/document_icon.png"))); // NOI18N
         jLabel5.setText("Bài Tập");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -156,6 +175,28 @@ public class HSForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        CNHS.setVisible(true);
+        BTHS.setVisible(false);
+        LB.setVisible(false);
+        KT.setVisible(false);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        CNHS.setVisible(false);
+        BTHS.setVisible(true);
+        LB.setVisible(false);
+        KT.setVisible(false);
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+         CNHS.setVisible(false);
+        BTHS.setVisible(false);
+        LB.setVisible(true);
+        KT.setVisible(false);
+    }//GEN-LAST:event_jLabel3MouseClicked
+    
+    
     public static void main(String args[]) {
        
 
