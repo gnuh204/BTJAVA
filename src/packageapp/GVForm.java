@@ -31,7 +31,7 @@ public class GVForm extends javax.swing.JFrame {
         DSBT.setVisible(false);
         DSNHCH.setVisible(false);
         NHCH.setVisible(false);
-       
+       // nut them
         DSNHCH.setButtonListener(e -> onButtonThemNHCH());
     }
 

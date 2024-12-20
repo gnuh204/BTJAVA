@@ -3,11 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package FormGVpanel;
-
+import java.sql.Statement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
+import packageapp.DBConnection; 
 
 public class TThsPanel extends javax.swing.JPanel {
 
-   
+   private Connection connection;
     public TThsPanel() {
         initComponents();
     }
@@ -21,8 +28,8 @@ public class TThsPanel extends javax.swing.JPanel {
         jButtonTimKiem = new javax.swing.JButton();
         jButtonXoa = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jTextFieldTenTTk = new javax.swing.JTextField();
-        jTextFieldTMK = new javax.swing.JTextField();
+        addTenTK = new javax.swing.JTextField();
+        addMK = new javax.swing.JTextField();
         jButtonThemTK = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -63,9 +70,9 @@ public class TThsPanel extends javax.swing.JPanel {
             }
         });
 
-        jTextFieldTMK.addActionListener(new java.awt.event.ActionListener() {
+        addMK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldTMKActionPerformed(evt);
+                addMKActionPerformed(evt);
             }
         });
 
@@ -92,8 +99,8 @@ public class TThsPanel extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldTMK, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextFieldTenTTk)
+                            .addComponent(addMK, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(addTenTK)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -107,11 +114,11 @@ public class TThsPanel extends javax.swing.JPanel {
                 .addGap(7, 7, 7)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldTenTTk, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addTenTK, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldTMK, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addMK, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonThemTK, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(7, Short.MAX_VALUE))
@@ -201,12 +208,34 @@ public class TThsPanel extends javax.swing.JPanel {
            
     }//GEN-LAST:event_jButtonTimKiemActionPerformed
 
-    private void jTextFieldTMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTMKActionPerformed
+    private void addMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMKActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldTMKActionPerformed
-
+    }//GEN-LAST:event_addMKActionPerformed
+// Thêm tk cho hoc sinh
     private void jButtonThemTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThemTKActionPerformed
-       
+      String TenTK, MK, query;
+      try{
+          connection = DBConnection.getConnection();
+          Statement st = connection.createStatement();
+          if("".equals(addTenTK.getText())){
+              JOptionPane.showMessageDialog(new JFrame(), "chưa nhập tên tài khoản","lỗi",JOptionPane.ERROR_MESSAGE);
+              
+          }else if("".equals(addMK.getText())){
+              JOptionPane.showMessageDialog(new JFrame(), "chưa nhập mật khẩu","lỗi",JOptionPane.ERROR_MESSAGE);
+          }else{
+            TenTK = addTenTK.getText();
+            MK = addMK.getText();
+            query = "INSERT INTO userhs(ten_tk, mk) VALUES('" + TenTK + "', '" + MK + "')";
+            st.execute(query);
+            addTenTK.setText("");
+            addMK.setText("");
+            showMessageDialog(null,"Thêm tài khoản Thành công ");
+            
+          }
+      }catch(Exception e){
+          System.out.println("lỗi" + e.getMessage());
+      }
+      
     }//GEN-LAST:event_jButtonThemTKActionPerformed
 
     private void jButtonTimKiem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTimKiem1ActionPerformed
@@ -215,6 +244,8 @@ public class TThsPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField addMK;
+    private javax.swing.JTextField addTenTK;
     private javax.swing.JButton jButtonThemTK;
     private javax.swing.JButton jButtonTimKiem;
     private javax.swing.JButton jButtonTimKiem1;
@@ -227,7 +258,5 @@ public class TThsPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextFieldTMK;
-    private javax.swing.JTextField jTextFieldTenTTk;
     // End of variables declaration//GEN-END:variables
 }

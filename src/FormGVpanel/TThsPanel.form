@@ -136,8 +136,8 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jTextFieldTMK" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="jTextFieldTenTTk" max="32767" attributes="0"/>
+                                  <Component id="addMK" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="addTenTK" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -158,11 +158,11 @@
                       <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextFieldTenTTk" min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="addTenTK" min="-2" pref="34" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextFieldTMK" min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="addMK" min="-2" pref="34" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButtonThemTK" min="-2" pref="35" max="-2" attributes="0"/>
                       <EmptySpace pref="7" max="32767" attributes="0"/>
@@ -171,11 +171,11 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JTextField" name="jTextFieldTenTTk">
+            <Component class="javax.swing.JTextField" name="addTenTK">
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldTMK">
+            <Component class="javax.swing.JTextField" name="addMK">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldTMKActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addMKActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonThemTK">
