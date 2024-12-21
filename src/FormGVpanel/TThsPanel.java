@@ -6,6 +6,7 @@ package FormGVpanel;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -24,9 +25,9 @@ public class TThsPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jButtonTimKiem = new javax.swing.JButton();
-        jButtonXoa = new javax.swing.JButton();
+        TimKiemhs = new javax.swing.JTextField();
+        Btnsuahs = new javax.swing.JButton();
+        Btnxoahs = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         addTenTK = new javax.swing.JTextField();
         addMK = new javax.swing.JTextField();
@@ -34,7 +35,7 @@ public class TThsPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButtonTimKiem1 = new javax.swing.JButton();
+        Btntimkiemhs = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -44,29 +45,29 @@ public class TThsPanel extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        TimKiemhs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                TimKiemhsActionPerformed(evt);
             }
         });
 
-        jButtonTimKiem.setBackground(new java.awt.Color(0, 153, 51));
-        jButtonTimKiem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButtonTimKiem.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonTimKiem.setText("Sửa");
-        jButtonTimKiem.addActionListener(new java.awt.event.ActionListener() {
+        Btnsuahs.setBackground(new java.awt.Color(0, 153, 51));
+        Btnsuahs.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Btnsuahs.setForeground(new java.awt.Color(255, 255, 255));
+        Btnsuahs.setText("Sửa");
+        Btnsuahs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTimKiemActionPerformed(evt);
+                BtnsuahsActionPerformed(evt);
             }
         });
 
-        jButtonXoa.setBackground(new java.awt.Color(0, 153, 51));
-        jButtonXoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButtonXoa.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonXoa.setText("Xóa");
-        jButtonXoa.addActionListener(new java.awt.event.ActionListener() {
+        Btnxoahs.setBackground(new java.awt.Color(0, 153, 51));
+        Btnxoahs.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Btnxoahs.setForeground(new java.awt.Color(255, 255, 255));
+        Btnxoahs.setText("Xóa");
+        Btnxoahs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonXoaActionPerformed(evt);
+                BtnxoahsActionPerformed(evt);
             }
         });
 
@@ -128,13 +129,13 @@ public class TThsPanel extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Thông tin học sinh");
 
-        jButtonTimKiem1.setBackground(new java.awt.Color(0, 153, 51));
-        jButtonTimKiem1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButtonTimKiem1.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonTimKiem1.setText("Tim Kiếm");
-        jButtonTimKiem1.addActionListener(new java.awt.event.ActionListener() {
+        Btntimkiemhs.setBackground(new java.awt.Color(0, 153, 51));
+        Btntimkiemhs.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Btntimkiemhs.setForeground(new java.awt.Color(255, 255, 255));
+        Btntimkiemhs.setText("Tim Kiếm");
+        Btntimkiemhs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTimKiem1ActionPerformed(evt);
+                BtntimkiemhsActionPerformed(evt);
             }
         });
 
@@ -150,13 +151,13 @@ public class TThsPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TimKiemhs, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonTimKiem1)
+                        .addComponent(Btntimkiemhs)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonTimKiem)
+                        .addComponent(Btnsuahs)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Btnxoahs, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24)))
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -168,10 +169,10 @@ public class TThsPanel extends javax.swing.JPanel {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonTimKiem1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TimKiemhs, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Btnsuahs, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Btnxoahs, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Btntimkiemhs, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22))
         );
 
@@ -180,13 +181,13 @@ public class TThsPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Tên_TK", "Họ Tên", "Ngày sinh", "Lớp", "Giới tính"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -195,25 +196,25 @@ public class TThsPanel extends javax.swing.JPanel {
         jScrollPane1.setBounds(0, 170, 800, 580);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void TimKiemhsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TimKiemhsActionPerformed
         
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_TimKiemhsActionPerformed
 
-    private void jButtonXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonXoaActionPerformed
+    private void BtnxoahsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnxoahsActionPerformed
         
-    }//GEN-LAST:event_jButtonXoaActionPerformed
+    }//GEN-LAST:event_BtnxoahsActionPerformed
 
-    private void jButtonTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTimKiemActionPerformed
+    private void BtnsuahsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnsuahsActionPerformed
     
            
-    }//GEN-LAST:event_jButtonTimKiemActionPerformed
+    }//GEN-LAST:event_BtnsuahsActionPerformed
 
     private void addMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMKActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_addMKActionPerformed
 // Thêm tk cho hoc sinh
     private void jButtonThemTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThemTKActionPerformed
-      String TenTK, MK, query;
+      String TenTK, MK, query, query2,checkquery;
       try{
           connection = DBConnection.getConnection();
           Statement st = connection.createStatement();
@@ -225,12 +226,22 @@ public class TThsPanel extends javax.swing.JPanel {
           }else{
             TenTK = addTenTK.getText();
             MK = addMK.getText();
-            query = "INSERT INTO userhs(ten_tk, mk) VALUES('" + TenTK + "', '" + MK + "')";
+            checkquery = "SELECT * FROM userhs WHERE ten_tk = '"+TenTK +"'";
+            st.execute(checkquery);
+            ResultSet rs = st.executeQuery(checkquery);
+            if(rs.next()){
+               JOptionPane.showMessageDialog(new JFrame(), "Tên tài khoản đã tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);  
+            }else{
+            query = "INSERT INTO userhs(ten_tk, mk) VALUES('" + TenTK + "', '" + MK + "')" ;
+            query2 = "INSERT INTO student(ten_tk) VALUES('"+TenTK +"')";
+            
             st.execute(query);
+            st.execute(query2);
             addTenTK.setText("");
             addMK.setText("");
             showMessageDialog(null,"Thêm tài khoản Thành công ");
             
+          }
           }
       }catch(Exception e){
           System.out.println("lỗi" + e.getMessage());
@@ -238,18 +249,19 @@ public class TThsPanel extends javax.swing.JPanel {
       
     }//GEN-LAST:event_jButtonThemTKActionPerformed
 
-    private void jButtonTimKiem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTimKiem1ActionPerformed
+    private void BtntimkiemhsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtntimkiemhsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonTimKiem1ActionPerformed
+    }//GEN-LAST:event_BtntimkiemhsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Btnsuahs;
+    private javax.swing.JButton Btntimkiemhs;
+    private javax.swing.JButton Btnxoahs;
+    private javax.swing.JTextField TimKiemhs;
     private javax.swing.JTextField addMK;
     private javax.swing.JTextField addTenTK;
     private javax.swing.JButton jButtonThemTK;
-    private javax.swing.JButton jButtonTimKiem;
-    private javax.swing.JButton jButtonTimKiem1;
-    private javax.swing.JButton jButtonXoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -257,6 +269,5 @@ public class TThsPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
