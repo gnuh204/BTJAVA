@@ -13,7 +13,5 @@ public class DBConnection {
         String USER_NAME = "root";
         String PASSWORD = "";
         return DriverManager.getConnection(DB_URL, USER_NAME, PASSWORD);
-        
-        
     }
 }
