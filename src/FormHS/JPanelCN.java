@@ -1,6 +1,7 @@
 
 package FormHS;
 import packageapp.BackgroundPanel;
+
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 import packageapp.DBConnection;
+import packageapp.Login.UserSession;
 
 public class JPanelCN extends javax.swing.JPanel {
 private Connection connection;
@@ -19,10 +21,11 @@ private Connection connection;
         buttonGroup.add(jRadioNam);
         buttonGroup.add(jRadioNu);
         String Gioi_Tinh = null,checkquery;
+        String currentUsername = UserSession.getUsername();
            try{
             connection = DBConnection.getConnection();
             Statement st = connection.createStatement();
-            checkquery = "SELECT * FROM student WHERE ten_tk = 'hung'";
+            checkquery = "SELECT * FROM student WHERE ten_tk = '"+currentUsername+"'";
             st.execute(checkquery);
             ResultSet rs = st.executeQuery(checkquery);
             if(rs.next()){
@@ -48,6 +51,7 @@ private Connection connection;
        }
         
     }
+
 
 
  
@@ -195,10 +199,12 @@ private Connection connection;
     }//GEN-LAST:event_lopActionPerformed
 
     private void luu_thong_tinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_luu_thong_tinActionPerformed
-      String Ho_Ten, Ngay_Thang, Lop,Gioi_Tinh = null,query;
+      String Ho_Ten, Ngay_Thang, Lop,Gioi_Tinh = null,query,checklg;
+      String currentUsername = UserSession.getUsername();
       Ho_Ten = ho_ten.getText();
       Ngay_Thang = ngay_thang.getText();
       Lop = lop.getText();
+      
       if(jRadioNam.isSelected()){
           Gioi_Tinh = "Nam";
       }
@@ -206,13 +212,13 @@ private Connection connection;
           Gioi_Tinh = "Nữ";
       }
       if (Ho_Ten.isEmpty() || Ngay_Thang.isEmpty() || Lop.isEmpty() || Gioi_Tinh == null){
-          JOptionPane.showMessageDialog(this,"Vui lòng nhâpj dầy đủ thông tin!","Lỗi",JOptionPane.ERROR_MESSAGE);
+          JOptionPane.showMessageDialog(this,"Vui lòng nhập dầy đủ thông tin!","Lỗi",JOptionPane.ERROR_MESSAGE);
           return;
       }
         try{
             connection = DBConnection.getConnection();
             Statement st = connection.createStatement();
-            query = "UPDATE `student` SET `ho_ten` ='"+Ho_Ten+"', `ngay_sinh` = '"+Ngay_Thang+"', `lop` ='"+Lop+"', `gioi_tinh` = '"+Gioi_Tinh+"' WHERE `student`.`ten_tk` = 'hung'";
+            query = "UPDATE `student` SET `ho_ten` ='"+Ho_Ten+"', `ngay_sinh` = '"+Ngay_Thang+"', `lop` ='"+Lop+"', `gioi_tinh` = '"+Gioi_Tinh+"' WHERE `student`.`ten_tk` = '"+currentUsername+"'";
             st.execute(query);
             showMessageDialog(null,"Cập nhật thông tin thành công");
        }catch(Exception e){

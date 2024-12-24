@@ -3,11 +3,10 @@ package packageapp;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.showMessageDialog;
+
 
 
 public class Login extends javax.swing.JFrame {
@@ -193,6 +192,18 @@ public class Login extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnOPLoginGvActionPerformed
 
+    public class UserSession {
+    private static String username;
+
+    public static String getUsername() {
+        return username;
+    }
+
+    public static void setUsername(String username) {
+        UserSession.username = username;
+    }
+}
+
     private void LoginhsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginhsActionPerformed
            String TenTK, MK, query,passDb = null;
            int NotFound = 0;
@@ -214,6 +225,7 @@ public class Login extends javax.swing.JFrame {
                 NotFound = 1;
             }
             if(NotFound == 1 && MK.equals(passDb)){
+            UserSession.setUsername(TenTK);
             HSForm HSFormFrame = new HSForm();
             HSFormFrame.setVisible(true);
             HSFormFrame.pack();

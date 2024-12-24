@@ -3,14 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package FormGVpanel;
+import java.util.List;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
+import javax.swing.table.DefaultTableModel;
 import packageapp.DBConnection; 
 
 public class TThsPanel extends javax.swing.JPanel {
@@ -18,8 +21,36 @@ public class TThsPanel extends javax.swing.JPanel {
    private Connection connection;
     public TThsPanel() {
         initComponents();
+        table();
     }
-
+private void table(){
+     String query;
+    try{
+            connection = DBConnection.getConnection();
+            Statement st = connection.createStatement();
+                query = "SElECT * FROM student";
+                ResultSet rs = st.executeQuery(query);
+                List<Object[]> rowData = new ArrayList<>();
+                while(rs.next()){
+                    String tenTk = rs.getString("ten_tk");
+                    String Hoten = rs.getString("ho_ten");
+                    String NgaySinh = rs.getString("ngay_sinh");
+                    String Lop = rs.getString("lop");
+                    String GioiTinh = rs.getString("gioi_tinh");
+                    rowData.add(new Object[]{tenTk, Hoten, NgaySinh, Lop, GioiTinh});
+                    
+                }
+            Object[][] dataFromDb = rowData.toArray(new Object[0][]);
+            String[] columnNames = {"Tên TK", "Họ tên", "Ngày sinh", "Lớp", "Giới tính"}; // Thêm tiêu đề cột
+            DefaultTableModel model = new DefaultTableModel(dataFromDb, columnNames);
+            jTable1.setModel(model);
+            
+            
+            
+        }catch(Exception e){
+            System.out.println("lỗi" + e.getMessage());
+        }
+}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -250,7 +281,36 @@ public class TThsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonThemTKActionPerformed
 
     private void BtntimkiemhsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtntimkiemhsActionPerformed
-        // TODO add your handling code here:
+        String Ten, query;
+        try{
+            connection = DBConnection.getConnection();
+            Statement st = connection.createStatement();
+            if("".equals(TimKiemhs.getText())){
+             JOptionPane.showMessageDialog(new JFrame(), "Vui lòng nhập thông tin tìm kiếm","lỗi",JOptionPane.ERROR_MESSAGE);
+            }else{
+                Ten = TimKiemhs.getText();
+                query = "SElECT * FROM student WHERE ten_tk LIKE '"+Ten+"' OR ho_ten LIKE '"+Ten+"' OR ngay_sinh LIKE '"+Ten+"' OR lop LIKE '"+Ten+"' OR gioi_tinh LIKE '"+Ten+"'";
+                ResultSet rs = st.executeQuery(query);
+                List<Object[]> rowData = new ArrayList<>();
+                while(rs.next()){
+                    String tenTk = rs.getString("ten_tk");
+                    String Hoten = rs.getString("ho_ten");
+                    String NgaySinh = rs.getString("ngay_sinh");
+                    String Lop = rs.getString("lop");
+                    String GioiTinh = rs.getString("gioi_tinh");
+                    rowData.add(new Object[]{tenTk, Hoten, NgaySinh, Lop, GioiTinh});
+                    
+                }
+            Object[][] dataFromDb = rowData.toArray(new Object[0][]);
+            String[] columnNames = {"Tên TK", "Họ tên", "Ngày sinh", "Lớp", "Giới tính"}; // Thêm tiêu đề cột
+            DefaultTableModel model = new DefaultTableModel(dataFromDb, columnNames);
+            jTable1.setModel(model);
+            }
+            
+            
+        }catch(Exception e){
+            System.out.println("lỗi" + e.getMessage());
+        }
     }//GEN-LAST:event_BtntimkiemhsActionPerformed
 
 

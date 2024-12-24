@@ -892,7 +892,7 @@ public class JPanelBT extends javax.swing.JPanel {
                     String serverPath = "D:\\JAVABTL\\upload\\" ;
                     File destinationFile = new File(serverPath + selectedFile.getName());
                     // Copy file vào thư mục máy chủ
-                    
+                    Files.copy(selectedFile.toPath(), destinationFile.toPath());
                     JOptionPane.showMessageDialog(frame, "Tải file thành công!");
                 } catch (HeadlessException | IOException ex) {
                     JOptionPane.showMessageDialog(frame, "Lỗi khi tải file!");
