@@ -1,18 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package FormGVpanel;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.sql.Statement;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.event.*;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import packageapp.DBConnection; 
 
@@ -21,9 +19,23 @@ public class TThsPanel extends javax.swing.JPanel {
    private Connection connection;
     public TThsPanel() {
         initComponents();
-        table();
+        loadtable();
     }
-private void table(){
+
+// lây thông tin tên tài khoản khi click   
+public class UserSession {
+    private static String username;
+
+    public static String getUsername() {
+        return username;
+    }
+
+    public static void setUsername(String username) {
+        UserSession.username = username;
+    }
+}
+// load dứ liêu từ cơ sở dữ liệu 
+private void loadtable(){
      String query;
     try{
             connection = DBConnection.getConnection();
@@ -221,6 +233,11 @@ private void table(){
                 "Tên_TK", "Họ Tên", "Ngày sinh", "Lớp", "Giới tính"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         add(jScrollPane1);
@@ -232,16 +249,55 @@ private void table(){
     }//GEN-LAST:event_TimKiemhsActionPerformed
 
     private void BtnxoahsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnxoahsActionPerformed
-        
+        String checkquery;
+        String currentUsername = UserSession.getUsername();
+           try{
+            connection = DBConnection.getConnection();
+            Statement st = connection.createStatement();
+            checkquery = "DELETE FROM userhs WHERE ten_tk = '"+currentUsername+"'";
+            st.execute(checkquery);
+            showMessageDialog(null,"Đã xóa tài khoản "+currentUsername+"");
+            loadtable(); 
+       }catch(Exception e){
+           System.out.println("Loi"+e.getMessage());
+       }  
     }//GEN-LAST:event_BtnxoahsActionPerformed
 
     private void BtnsuahsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnsuahsActionPerformed
-    
-           
+      JFrame frame = new JFrame("Thay đổi mật khẩu");
+        frame.setSize(300, 100);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(null);
+        JTextField Mk = new JTextField();
+        Mk.setBounds(20, 20, 150, 30);
+        JButton Cnbtn = new JButton("Lưu");
+        Cnbtn.setBounds(180, 20, 100, 30); 
+        frame.add(Mk);
+        frame.add(Cnbtn);
+        Cnbtn.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+        String query , Mat_Khau;
+        Mat_Khau = Mk.getText();
+        String currentUsername = UserSession.getUsername();
+        try{
+        connection = DBConnection.getConnection();
+        Statement st = connection.createStatement();
+        query = "UPDATE `userhs` SET mk = '"+Mat_Khau+"' WHERE `userhs`.`ten_tk` = '"+currentUsername+"'";
+        st.execute(query);
+        showMessageDialog(null,"Cập nhật thông tin thành công");
+        Mk.setText("");
+        }catch(Exception ex ){
+          System.out.println("Loi"+ex.getMessage());
+        }
+        }
+        });
+        frame.setLocationRelativeTo(null); 
+        frame.setVisible(true);
+        
     }//GEN-LAST:event_BtnsuahsActionPerformed
 
     private void addMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMKActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_addMKActionPerformed
 // Thêm tk cho hoc sinh
     private void jButtonThemTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonThemTKActionPerformed
@@ -271,6 +327,7 @@ private void table(){
             addTenTK.setText("");
             addMK.setText("");
             showMessageDialog(null,"Thêm tài khoản Thành công ");
+            loadtable();
             
           }
           }
@@ -289,7 +346,7 @@ private void table(){
              JOptionPane.showMessageDialog(new JFrame(), "Vui lòng nhập thông tin tìm kiếm","lỗi",JOptionPane.ERROR_MESSAGE);
             }else{
                 Ten = TimKiemhs.getText();
-                query = "SElECT * FROM student WHERE ten_tk LIKE '"+Ten+"' OR ho_ten LIKE '"+Ten+"' OR ngay_sinh LIKE '"+Ten+"' OR lop LIKE '"+Ten+"' OR gioi_tinh LIKE '"+Ten+"'";
+                query = "SElECT * FROM student WHERE ten_tk LIKE '%"+Ten+"%' OR ho_ten LIKE '%"+Ten+"%' OR ngay_sinh LIKE '%"+Ten+"%' OR lop LIKE '%"+Ten+"%' OR gioi_tinh LIKE '%"+Ten+"%'";
                 ResultSet rs = st.executeQuery(query);
                 List<Object[]> rowData = new ArrayList<>();
                 while(rs.next()){
@@ -312,6 +369,19 @@ private void table(){
             System.out.println("lỗi" + e.getMessage());
         }
     }//GEN-LAST:event_BtntimkiemhsActionPerformed
+   
+    /*public void setMouseClick(java.awt.event.MouseListener listener) {
+    jTable1.addMouseListener(listener);
+    }*/
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int row = jTable1.getSelectedRow();
+        if (row != -1) { 
+            Object Tentk = jTable1.getValueAt(row, 0);
+            UserSession.setUsername(Tentk.toString());
+            System.out.println("Đã chọn tên người dùng: " + Tentk.toString());
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

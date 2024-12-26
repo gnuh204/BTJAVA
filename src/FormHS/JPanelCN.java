@@ -18,8 +18,13 @@ private Connection connection;
     
     public JPanelCN() {
         initComponents();
-        buttonGroup.add(jRadioNam);
-        buttonGroup.add(jRadioNu);
+        loaddata();
+        
+        
+    }
+private void loaddata(){
+    buttonGroup.add(jRadioNam);
+    buttonGroup.add(jRadioNu);
         String Gioi_Tinh = null,checkquery;
         String currentUsername = UserSession.getUsername();
            try{
@@ -49,9 +54,7 @@ private Connection connection;
        }catch(Exception e){
            System.out.println("Loi"+e.getMessage());
        }
-        
-    }
-
+}
 
 
  

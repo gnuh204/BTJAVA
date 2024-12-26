@@ -15,6 +15,7 @@ public class JPanelKT extends javax.swing.JPanel {
      */
     public JPanelKT() {
         initComponents();
+        
     }
 
     /**
