@@ -5,10 +5,9 @@
 package packageapp;
 
 import FormHS.JPaneLB;
-import FormHS.JPanelBTHS;
 import FormHS.JPanelCN;
 import FormHS.JPanelKT;
-
+import FormHS.JPanelBTHS;
 
 
 
@@ -31,8 +30,13 @@ public class HSForm extends javax.swing.JFrame {
         CNHS.setVisible(true);
         BTHS.setVisible(false);
         LB.setVisible(false);
-        KT.setVisible(false);     
+        KT.setVisible(false);
+        BTHS.LamBaiButtonListener(e -> onLam_bai());
+
+
+        
     }
+   
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -191,20 +195,22 @@ public class HSForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-         CNHS.setVisible(false);
+        CNHS.setVisible(false);
+        BTHS.setVisible(false);
+        LB.setVisible(false);
+        KT.setVisible(false);
+    }//GEN-LAST:event_jLabel3MouseClicked
+    private void onLam_bai(){
+        
+        CNHS.setVisible(false);
         BTHS.setVisible(false);
         LB.setVisible(true);
         KT.setVisible(false);
-    }//GEN-LAST:event_jLabel3MouseClicked
-    
-    
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new HSForm().setVisible(true);
-            }
-        });
+        LB.loadBT();
+        
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -218,4 +224,6 @@ public class HSForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     // End of variables declaration//GEN-END:variables
+
+   
 }

@@ -3,12 +3,13 @@ package FormGVpanel;
 
 
 
+import java.sql.Statement;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
-
+import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -35,11 +36,10 @@ public class JPanelBT extends javax.swing.JPanel {
         Filepath.filepath = filepath;
         }
     }
-    
+   // luu bai tap
     public void saveAnswers(String tenbt, String monhoc,String lkbaitap,String[] answers) {
-    String sql = "INSERT INTO dap_an (ten_bt,ten_mh,lk_bt,cau1, cau2, cau3, cau4, cau5, cau6, cau7, cau8, cau9, cau10, cau11, cau12, cau13, cau14, cau15, cau16, cau17, cau18, cau19, cau20) "
+    String sql = "INSERT INTO bai_tap (ten_bt,ten_mh,lk_bt,cau1, cau2, cau3, cau4, cau5, cau6, cau7, cau8, cau9, cau10, cau11, cau12, cau13, cau14, cau15, cau16, cau17, cau18, cau19, cau20) "
                + "VALUES (?,?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
     try {
         connection = DBConnection.getConnection();
         PreparedStatement pstmt = connection.prepareStatement(sql);
@@ -54,7 +54,7 @@ public class JPanelBT extends javax.swing.JPanel {
         System.out.println("Loi"+e.getMessage());
         }
     }
-    
+    // xoa data
     public void deletefromdata(String table,String column,String name){
       String sql = "DELETE FROM " + table + " WHERE " + column + " = ?";
 
@@ -75,6 +75,24 @@ public class JPanelBT extends javax.swing.JPanel {
             System.out.println("Lỗi khi xóa tệp khỏi cơ sở dữ liệu: " + e.getMessage());
         }
     }
+    // kt ten 
+    private boolean KTtbt(String tenbt , String monhoc) {
+    boolean exists = false;
+    String checkquery;
+    try {
+        connection = DBConnection.getConnection();
+        Statement st = connection.createStatement();
+        checkquery = "SELECT * FROM bai_tap WHERE ten_bt = '"+tenbt +"' AND ten_mh = '"+monhoc+"' ";
+            st.execute(checkquery);
+            ResultSet rs = st.executeQuery(checkquery);
+            if(rs.next()) {
+            exists = true;
+        }
+    } catch (Exception e) {
+        System.out.println("Lỗi khi kiểm tra tên bài tập: " + e.getMessage());
+    }
+    return exists;
+}
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -84,10 +102,10 @@ public class JPanelBT extends javax.swing.JPanel {
         ten_bai_tap = new javax.swing.JTextField();
         Btn_file = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        ten_mon_hoc = new javax.swing.JTextField();
         BtnUp = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         LabelPath = new javax.swing.JLabel();
+        ComboBoxmh = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -182,10 +200,6 @@ public class JPanelBT extends javax.swing.JPanel {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(50, 10, 103, 20);
 
-        ten_mon_hoc.setPreferredSize(new java.awt.Dimension(65, 25));
-        jPanel1.add(ten_mon_hoc);
-        ten_mon_hoc.setBounds(240, 40, 180, 40);
-
         BtnUp.setText("Tải Lên");
         BtnUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,6 +216,10 @@ public class JPanelBT extends javax.swing.JPanel {
         jLabel4.setBounds(250, 10, 100, 16);
         jPanel1.add(LabelPath);
         LabelPath.setBounds(460, 50, 280, 30);
+
+        ComboBoxmh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán", "Tiếng Việt", "Khoa Học" }));
+        jPanel1.add(ComboBoxmh);
+        ComboBoxmh.setBounds(242, 40, 110, 40);
 
         add(jPanel1);
         jPanel1.setBounds(0, 0, 800, 150);
@@ -1024,9 +1042,15 @@ public class JPanelBT extends javax.swing.JPanel {
 
     private void BtnUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpActionPerformed
 
-        if (selectedFilePath != null && !ten_bai_tap.getText().isEmpty() && !ten_mon_hoc.getText().isEmpty()) {
+    if (selectedFilePath != null && !ten_bai_tap.getText().isEmpty()) {
+
     try {
-        
+        String monhoc = (String) ComboBoxmh.getSelectedItem();
+         String tenbt = ten_bai_tap.getText();
+        if (KTtbt(tenbt,monhoc)) {
+            JOptionPane.showMessageDialog(null, "Tên bài tập đã tồn tại. Vui lòng chọn tên khác!");
+            return;
+        }
         // Đường dẫn lưu file trên máy chủ
         String serverPath = "D:\\JAVABTL\\upload\\";
         File destinationDir = new File(serverPath);
@@ -1050,7 +1074,7 @@ public class JPanelBT extends javax.swing.JPanel {
                 return;
             }else{
                 String oldFilePath = destinationFile.getAbsolutePath();
-                String table = "dap_an";
+                String table = "bai_tap";
                 String colum = "lk_bt";
                 deletefromdata(table,colum,oldFilePath);
             }
@@ -1063,8 +1087,8 @@ public class JPanelBT extends javax.swing.JPanel {
         // Kiểm tra nếu savedFilePath không phải null
         if (savedFilePath != null) {
             // Lưu thông tin bài tập và môn học
-            String tenbt = ten_bai_tap.getText();
-            String monhoc = ten_mon_hoc.getText();
+           
+            
             String lkbaitap = savedFilePath;
             String[] answers = new String[20];
 
@@ -1078,11 +1102,9 @@ public class JPanelBT extends javax.swing.JPanel {
             saveAnswers(tenbt, monhoc, lkbaitap, answers);
             System.out.println("Lưu thành công!");
             JOptionPane.showMessageDialog(null, "Tải file thành công!");
-
             // Xóa các trường và biến đã lưu
             LabelPath.setText("");
             ten_bai_tap.setText("");
-            ten_mon_hoc.setText("");
             savedFilePath = null;
             selectedFilePath = null;
         } else {
@@ -1092,8 +1114,7 @@ public class JPanelBT extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Lỗi khi tải file: " + ex.getMessage());
     } catch (Exception ex) {
         System.out.println("Lỗi: " + ex.getMessage());
-        JOptionPane.showMessageDialog(null, "Lỗi trong quá trình lưu câu trả lời.");
-    }
+}
 } else {
     JOptionPane.showMessageDialog(null, "Chưa chọn file hoặc chưa nhập tên bài tập/môn học!");
 }
@@ -1125,6 +1146,7 @@ public class JPanelBT extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> ComboBoxCau7;
     private javax.swing.JComboBox<String> ComboBoxCau8;
     private javax.swing.JComboBox<String> ComboBoxCau9;
+    private javax.swing.JComboBox<String> ComboBoxmh;
     private javax.swing.JLabel LabelPath;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1172,6 +1194,5 @@ public class JPanelBT extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JTextField ten_bai_tap;
-    private javax.swing.JTextField ten_mon_hoc;
     // End of variables declaration//GEN-END:variables
 }
