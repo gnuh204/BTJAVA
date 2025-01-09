@@ -1,5 +1,6 @@
 
 package FormGVpanel;
+import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.sql.Statement;
@@ -12,6 +13,8 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumnModel;
 import packageapp.DBConnection; 
 
 public class TThsPanel extends javax.swing.JPanel {
@@ -50,12 +53,21 @@ private void loadtable(){
                     String Lop = rs.getString("lop");
                     String GioiTinh = rs.getString("gioi_tinh");
                     rowData.add(new Object[]{tenTk, Hoten, NgaySinh, Lop, GioiTinh});
-                    
                 }
             Object[][] dataFromDb = rowData.toArray(new Object[0][]);
             String[] columnNames = {"Tên TK", "Họ tên", "Ngày sinh", "Lớp", "Giới tính"}; // Thêm tiêu đề cột
             DefaultTableModel model = new DefaultTableModel(dataFromDb, columnNames);
             jTable1.setModel(model);
+            JTableHeader header = jTable1.getTableHeader();
+            header.setFont(new Font("Arial", Font.BOLD, 16));
+            TableColumnModel columnModel = jTable1.getColumnModel();
+            columnModel.getColumn(0).setPreferredWidth(50); 
+            columnModel.getColumn(1).setPreferredWidth(150); 
+            columnModel.getColumn(2).setPreferredWidth(100);
+            columnModel.getColumn(3).setPreferredWidth(50);
+            columnModel.getColumn(4).setPreferredWidth(50);
+           jTable1.setFont(new Font("Arial", Font.PLAIN, 16));
+           jTable1.setRowHeight(25);
             
             
             
@@ -191,7 +203,7 @@ private void loadtable(){
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(91, 91, 91)
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(TimKiemhs, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,7 +253,7 @@ private void loadtable(){
         jScrollPane1.setViewportView(jTable1);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(0, 170, 800, 580);
+        jScrollPane1.setBounds(0, 170, 790, 570);
     }// </editor-fold>//GEN-END:initComponents
 
     private void TimKiemhsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TimKiemhsActionPerformed

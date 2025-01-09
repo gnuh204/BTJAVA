@@ -21,6 +21,7 @@ public class GVForm extends javax.swing.JFrame {
     
     public GVForm() {
         initComponents();
+        
         jLayeredPaneGV.add(TThs);
         jLayeredPaneGV.add(BT);
         jLayeredPaneGV.add(DSBT);

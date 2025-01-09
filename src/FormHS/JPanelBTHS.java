@@ -58,7 +58,7 @@ public class JPanelBTHS extends javax.swing.JPanel {
     titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
 
     JLabel timeLabel = new JLabel("Đã gửi vào lúc: " + sentTime);
-    timeLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+    timeLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 
     infoPanel.add(titleLabel);
     infoPanel.add(timeLabel);
