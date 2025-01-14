@@ -8,6 +8,7 @@ import FormHS.JPaneLB;
 import FormHS.JPanelCN;
 import FormHS.JPanelKT;
 import FormHS.JPanelBTHS;
+import FormHS.JPanelKT1;
 
 
 
@@ -16,7 +17,7 @@ public class HSForm extends javax.swing.JFrame {
     JPanelBTHS BTHS = new JPanelBTHS();
     JPaneLB LB = new JPaneLB();
     JPanelKT KT = new JPanelKT();
-    
+    JPanelKT1 KT1 = new JPanelKT1();
     
     
   
@@ -27,12 +28,14 @@ public class HSForm extends javax.swing.JFrame {
         jLayeredPaneFHS.add(BTHS);
         jLayeredPaneFHS.add(LB);
         jLayeredPaneFHS.add(KT);
+        jLayeredPaneFHS.add(KT1);
         CNHS.setVisible(true);
         BTHS.setVisible(false);
         LB.setVisible(false);
         KT.setVisible(false);
+        KT1.setVisible(false);
         BTHS.LamBaiButtonListener(e -> onLam_bai());
-
+        KT.btnlbButtonListener(e -> onbtnlb());
 
         
     }
@@ -81,12 +84,14 @@ public class HSForm extends javax.swing.JFrame {
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 1250, 50);
 
-        jPanel2.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
         jPanel2.setPreferredSize(new java.awt.Dimension(130, 550));
         jPanel2.setLayout(null);
 
-        jPanel3.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel3.setBackground(new java.awt.Color(0, 102, 102));
 
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/account_icon.png"))); // NOI18N
         jLabel2.setText("Cá Nhân ");
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -101,7 +106,7 @@ public class HSForm extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 20, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,10 +117,12 @@ public class HSForm extends javax.swing.JFrame {
         );
 
         jPanel2.add(jPanel3);
-        jPanel3.setBounds(0, 0, 150, 55);
+        jPanel3.setBounds(0, 0, 130, 55);
 
-        jPanel4.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel4.setBackground(new java.awt.Color(0, 102, 102));
 
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/document_icon.png"))); // NOI18N
         jLabel3.setText("Luyện thi");
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -143,8 +150,10 @@ public class HSForm extends javax.swing.JFrame {
         jPanel2.add(jPanel4);
         jPanel4.setBounds(0, 160, 130, 55);
 
-        jPanel6.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel6.setBackground(new java.awt.Color(0, 102, 102));
 
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/document_icon.png"))); // NOI18N
         jLabel5.setText("Bài Tập");
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -198,7 +207,7 @@ public class HSForm extends javax.swing.JFrame {
         CNHS.setVisible(false);
         BTHS.setVisible(false);
         LB.setVisible(false);
-        KT.setVisible(false);
+        KT.setVisible(true);
     }//GEN-LAST:event_jLabel3MouseClicked
     private void onLam_bai(){
         
@@ -209,6 +218,16 @@ public class HSForm extends javax.swing.JFrame {
         LB.loadBT();
         
     }
+    private void onbtnlb(){
+       CNHS.setVisible(false);
+        BTHS.setVisible(false);
+        LB.setVisible(false);
+        KT.setVisible(false);
+        KT1.setVisible(true);
+        KT.bntKT();
+        KT1.KT1();  
+    }
+    
     
     
 

@@ -11,7 +11,9 @@ import FormGVpanel.TThsPanel;
 import FormGVpanel.JPanelNHCH;
 
 
+
 public class GVForm extends javax.swing.JFrame {
+
     JPanelNHCH NHCH = new JPanelNHCH();
     TThsPanel TThs = new TThsPanel();
     JPanelBT BT = new JPanelBT();
@@ -21,6 +23,7 @@ public class GVForm extends javax.swing.JFrame {
     
     public GVForm() {
         initComponents();
+        
         
         jLayeredPaneGV.add(TThs);
         jLayeredPaneGV.add(BT);
@@ -420,7 +423,7 @@ public class GVForm extends javax.swing.JFrame {
         jLayeredPaneGV.add(TCPanel, "card2");
 
         getContentPane().add(jLayeredPaneGV);
-        jLayeredPaneGV.setBounds(200, 50, 800, 750);
+        jLayeredPaneGV.setBounds(200, 50, 790, 750);
 
         getAccessibleContext().setAccessibleName("FormGV");
 
@@ -463,6 +466,7 @@ public class GVForm extends javax.swing.JFrame {
         DSBT.setVisible(true);
         DSNHCH.setVisible(false);
         NHCH.setVisible(false);
+        DSBT.load();
     }//GEN-LAST:event_jLabelDSBTGVMouseClicked
     
     private void jLabelNHCH_GVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNHCH_GVMouseClicked
@@ -472,6 +476,7 @@ public class GVForm extends javax.swing.JFrame {
         DSBT.setVisible(false);
         DSNHCH.setVisible(true);
         NHCH.setVisible(false);
+        DSNHCH.loadtable();
     }//GEN-LAST:event_jLabelNHCH_GVMouseClicked
     
      private void onButtonThemNHCH() {
@@ -481,6 +486,7 @@ public class GVForm extends javax.swing.JFrame {
        DSBT.setVisible(false);
        DSNHCH.setVisible(false);
        NHCH.setVisible(true);
+       
     }
     
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked

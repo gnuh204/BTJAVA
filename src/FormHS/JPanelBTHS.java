@@ -18,7 +18,7 @@ public class JPanelBTHS extends javax.swing.JPanel {
   
     public JPanelBTHS() {
         initComponents();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        
  
     }
     
@@ -42,11 +42,14 @@ public class JPanelBTHS extends javax.swing.JPanel {
 }
     
     private void addExercisePanel(String title,String monhoc, String sentTime,JPanel mainPanel) {
+    mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
     // Tạo JPanel cho bài tập mới
     JPanel exercisePanel = new JPanel();
     exercisePanel.setLayout(new BorderLayout());
-    exercisePanel.setBorder(BorderFactory.createLineBorder(Color.PINK));
-    exercisePanel.setPreferredSize(new Dimension(500, 50));  // Kích thước mặc định cho nhiều bài tập
+    exercisePanel.setBorder(BorderFactory.createLineBorder(Color.RED));
+    exercisePanel.setPreferredSize(new Dimension(500,50));
+ // Để layout tự tính toán
+// Kích thước mặc định cho nhiều bài tập
     
     exercisePanel.putClientProperty("title", title);
     exercisePanel.putClientProperty("monhoc", monhoc);
@@ -62,7 +65,7 @@ public class JPanelBTHS extends javax.swing.JPanel {
 
     infoPanel.add(titleLabel);
     infoPanel.add(timeLabel);
-    exercisePanel.add(infoPanel, BorderLayout.CENTER);
+    exercisePanel.add(infoPanel);
     // Thêm bài tập mới vào container chính
      exercisePanel.addMouseListener(new MouseAdapter() {
         @Override
@@ -90,7 +93,9 @@ public class JPanelBTHS extends javax.swing.JPanel {
     });
     JPanel container = new JPanel();
     container.setLayout(new FlowLayout(FlowLayout.CENTER, 1,2));  // Không gian giữa các bài tập theo chiều dọc
-    // Thêm bài tập vào container
+    container.setPreferredSize(new Dimension(500, 50)); // Chiều rộng 500, chiều cao 200
+    container.setMaximumSize(new Dimension(500, 50));  // Giới hạn kích thước tối đa
+
     container.add(exercisePanel);
     // Thêm container vào mainPanel
     mainPanel.add(container);
@@ -141,7 +146,7 @@ public class JPanelBTHS extends javax.swing.JPanel {
         mainPanel = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(204, 204, 204));
-        setLayout(new java.awt.GridLayout());
+        setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
         jPanel2.setLayout(null);
@@ -221,9 +226,9 @@ public class JPanelBTHS extends javax.swing.JPanel {
             paneltvietLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneltvietLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(paneltvietLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                .addGroup(paneltvietLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
@@ -289,7 +294,7 @@ public class JPanelBTHS extends javax.swing.JPanel {
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 561, Short.MAX_VALUE)
+            .addGap(0, 567, Short.MAX_VALUE)
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,9 +310,9 @@ public class JPanelBTHS extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(ScrollPanemain)
+                    .addComponent(ScrollPanemain, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 410, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(Lam_bai, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(41, 41, 41))
         );

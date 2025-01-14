@@ -1,16 +1,57 @@
 
 
 package FormGVpanel;
+import java.awt.Font;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import static javax.swing.JOptionPane.showMessageDialog;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import packageapp.DBConnection;
+
 
 
 
 
 public class JPanelDSNHCH extends javax.swing.JPanel {
-    
+private Connection connection;
+private String click = null;
     public JPanelDSNHCH() {
         
         initComponents();
+       
     }
+    public void loadtable(){
+    String query;
+    try{
+       connection = DBConnection.getConnection();
+       Statement st = connection.createStatement();
+       query = "SELECT * FROM n_hang_ch";
+       ResultSet rs = st.executeQuery(query);
+       List<Object[]> rowData = new ArrayList<>();
+       while(rs.next()){
+                    String Noi_dung = rs.getString("noi_dung");
+                    String dapanA = rs.getString("dap_an_a");
+                    String dapanB = rs.getString("dap_an_b");
+                    String dapanC = rs.getString("dap_an_c");
+                    String dapanD = rs.getString("dap_an_d");
+                    String dapanDung = rs.getString("dap_an_dung");
+                    String monhoc = rs.getString("monhoc");
+                    rowData.add(new Object[]{Noi_dung,monhoc,dapanA , dapanB,dapanC, dapanD,dapanDung});
+                }
+            Object[][] dataFromDb = rowData.toArray(new Object[0][]);
+            String[] columnNames = {"Nội Dung", "Môn", "Đáp án A", "Đáp án B", "Đáp án C","Đáp án D","Đáp án đúng"}; // Thêm tiêu đề cột
+            DefaultTableModel model = new DefaultTableModel(dataFromDb, columnNames);
+            Tablenhch.setModel(model);
+            JTableHeader header = Tablenhch.getTableHeader();
+            header.setFont(new Font("Arial", Font.BOLD, 16));
+            Tablenhch.setFont(new Font("Arial", Font.PLAIN, 16));
+            Tablenhch.setRowHeight(25);
+    }catch(Exception e){
+        System.out.println("loi"+ e.getMessage());
+    }
+}
 
    
     @SuppressWarnings("unchecked")
@@ -24,9 +65,9 @@ public class JPanelDSNHCH extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButtonThemNHCH = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Xoabtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Tablenhch = new javax.swing.JTable();
 
         setPreferredSize(new java.awt.Dimension(800, 750));
 
@@ -79,25 +120,38 @@ public class JPanelDSNHCH extends javax.swing.JPanel {
         jPanel1.add(jButton3);
         jButton3.setBounds(370, 640, 90, 40);
 
-        jButton2.setText("Xóa");
-        jPanel1.add(jButton2);
-        jButton2.setBounds(480, 640, 90, 40);
+        Xoabtn.setText("Xóa");
+        Xoabtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                XoabtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Xoabtn);
+        Xoabtn.setBounds(480, 640, 90, 40);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Tablenhch.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nội Dung", "Môn", "Đáp án A", "Đáp án B", "Đáp án C", "Đáp án D", "Đáp án đúng"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        Tablenhch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablenhchMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(Tablenhch);
+        if (Tablenhch.getColumnModel().getColumnCount() > 0) {
+            Tablenhch.getColumnModel().getColumn(0).setPreferredWidth(300);
+        }
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 200, 750, 430);
+        jScrollPane1.setBounds(30, 200, 740, 430);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -105,7 +159,7 @@ public class JPanelDSNHCH extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,17 +176,41 @@ public class JPanelDSNHCH extends javax.swing.JPanel {
       
     }//GEN-LAST:event_jButtonThemNHCHActionPerformed
 
+    private void XoabtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XoabtnActionPerformed
+        String query;
+       
+        try{
+             connection = DBConnection.getConnection();
+             Statement st = connection.createStatement();
+             query = "DELETE FROM n_hang_ch WHERE noi_dung = '"+click+"' ";
+             st.execute(query);
+             showMessageDialog(null,"Đã xóa tài khoản "+click+"");
+             loadtable();
+        }catch(Exception e){
+            System.out.println("loi"+ e.getMessage());
+        }
+    }//GEN-LAST:event_XoabtnActionPerformed
+
+    private void TablenhchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablenhchMouseClicked
+         int row = Tablenhch.getSelectedRow();
+        if (row != -1) { 
+            Object Noidung = Tablenhch.getValueAt(row, 0);
+            click = (String) Noidung;
+            System.out.println("Đã chọn tên người dùng: " + Noidung.toString());
+        }
+    }//GEN-LAST:event_TablenhchMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Tablenhch;
+    private javax.swing.JButton Xoabtn;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonThemNHCH;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 

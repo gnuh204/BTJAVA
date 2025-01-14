@@ -3,9 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package FormGVpanel;
+import java.sql.*;
+import javax.swing.*;
+import static javax.swing.JOptionPane.showMessageDialog;
+import packageapp.DBConnection;
+
 
 public class JPanelNHCH extends javax.swing.JPanel {
-
+private  Connection connection;
    
     public JPanelNHCH() {
         initComponents();
@@ -37,7 +42,7 @@ public class JPanelNHCH extends javax.swing.JPanel {
         btn_luu = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        ComboBoxmh = new javax.swing.JComboBox<>();
 
         jLabel2.setText("jLabel2");
 
@@ -104,7 +109,7 @@ public class JPanelNHCH extends javax.swing.JPanel {
         jPanel1.add(jLabel6);
         jLabel6.setBounds(440, 440, 70, 40);
         jPanel1.add(TFd);
-        TFd.setBounds(510, 440, 160, 40);
+        TFd.setBounds(510, 450, 160, 40);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Đáp án A:");
@@ -130,6 +135,11 @@ public class JPanelNHCH extends javax.swing.JPanel {
         ComboBoxdap_an.setBounds(200, 510, 100, 40);
 
         btn_luu.setText("Lưu");
+        btn_luu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_luuActionPerformed(evt);
+            }
+        });
         jPanel1.add(btn_luu);
         btn_luu.setBounds(610, 620, 120, 50);
 
@@ -142,9 +152,9 @@ public class JPanelNHCH extends javax.swing.JPanel {
         jPanel1.add(jLabel10);
         jLabel10.setBounds(470, 510, 70, 40);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán", "Tiếng Việt", "Khoa Học" }));
-        jPanel1.add(jComboBox1);
-        jComboBox1.setBounds(540, 510, 100, 40);
+        ComboBoxmh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán", "Tiếng Việt", "Khoa Học" }));
+        jPanel1.add(ComboBoxmh);
+        ComboBoxmh.setBounds(540, 510, 100, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -162,9 +172,44 @@ public class JPanelNHCH extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_luuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luuActionPerformed
+       String Noi_dung, dapanA, dapanB,dapanC,dapanD,dapandung,mon,query;
+       Noi_dung = TextArea_ch.getText();
+       dapanA = TFa.getText();
+       dapanB = TFb.getText();
+       dapanC = TFc.getText();
+       dapanD = TFd.getText();
+       dapandung = (String) ComboBoxdap_an.getSelectedItem();
+       mon = (String) ComboBoxmh.getSelectedItem();
+        try{
+           connection = DBConnection.getConnection();
+           Statement st = connection.createStatement();
+           if("".equals(Noi_dung)||"".equals(dapanA)||"".equals(dapanB)||"".equals(dapanC)||"".equals(dapanD)||"".equals(dapandung)||"".equals(mon)){
+               JOptionPane.showMessageDialog(new JFrame(), "Vui lòng nhập đày đủ thông tin","lỗi",JOptionPane.ERROR_MESSAGE);
+           }else{
+           query = "INSERT INTO n_hang_ch(noi_dung,dap_an_a,dap_an_b,dap_an_c,dap_an_d,dap_an_dung,monhoc)"+
+                   " VALUES ('"+Noi_dung+"','"+dapanA+"','"+dapanB+"','"+dapanC+"','"+dapanD+"','"+dapandung+"','"+mon+"')";
+           st.execute(query);
+           showMessageDialog(null,"Thêm câu hỏi thành công");
+           TextArea_ch.setText("");
+           TFa.setText("");
+           TFb.setText("");
+           TFc.setText("");
+           TFd.setText("");
+           ComboBoxdap_an.setSelectedIndex(0);
+           ComboBoxmh.setSelectedIndex(0);
+           
+           }
+           
+       }catch(Exception e){
+           System.out.println("loi" + e.getMessage());
+       }
+    }//GEN-LAST:event_btn_luuActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboBoxdap_an;
+    private javax.swing.JComboBox<String> ComboBoxmh;
     private javax.swing.JTextField TFa;
     private javax.swing.JTextField TFb;
     private javax.swing.JTextField TFc;
@@ -172,7 +217,6 @@ public class JPanelNHCH extends javax.swing.JPanel {
     private javax.swing.JTextArea TextArea_ch;
     private javax.swing.JButton btn_luu;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
