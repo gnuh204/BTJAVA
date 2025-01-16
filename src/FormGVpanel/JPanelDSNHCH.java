@@ -64,7 +64,6 @@ private String click = null;
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButtonThemNHCH = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         Xoabtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tablenhch = new javax.swing.JTable();
@@ -77,7 +76,7 @@ private String click = null;
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
         jPanel2.setPreferredSize(new java.awt.Dimension(800, 150));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Ngân hàng câu hỏi");
 
@@ -86,16 +85,16 @@ private String click = null;
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(439, 439, 439)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(452, Short.MAX_VALUE))
+                .addGap(380, 380, 380)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(398, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2);
@@ -114,11 +113,7 @@ private String click = null;
             }
         });
         jPanel1.add(jButtonThemNHCH);
-        jButtonThemNHCH.setBounds(400, 640, 90, 40);
-
-        jButton3.setText("Sửa");
-        jPanel1.add(jButton3);
-        jButton3.setBounds(510, 640, 90, 40);
+        jButtonThemNHCH.setBounds(450, 640, 90, 40);
 
         Xoabtn.setText("Xóa");
         Xoabtn.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +122,7 @@ private String click = null;
             }
         });
         jPanel1.add(Xoabtn);
-        Xoabtn.setBounds(620, 640, 90, 40);
+        Xoabtn.setBounds(580, 640, 90, 40);
 
         Tablenhch.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -204,7 +199,6 @@ private String click = null;
     private javax.swing.JTable Tablenhch;
     private javax.swing.JButton Xoabtn;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonThemNHCH;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

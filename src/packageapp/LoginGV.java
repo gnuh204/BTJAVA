@@ -2,10 +2,12 @@
 
  */
 package packageapp;
-
+import java.sql.*;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class LoginGV extends javax.swing.JFrame {
-
+private Connection connection;
    
     public LoginGV() {
         initComponents();
@@ -30,7 +32,6 @@ public class LoginGV extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Đăng nhập cho giáo viên");
-        setPreferredSize(new java.awt.Dimension(700, 400));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(700, 400));
@@ -134,15 +135,11 @@ public class LoginGV extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 186, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 192, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -157,7 +154,42 @@ public class LoginGV extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBLGVtoHSActionPerformed
 
     private void btnLoginGVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginGVActionPerformed
-        
+         String TenTK, MK, query,passDb = null;
+           int NotFound = 0;
+      try{
+          connection = DBConnection.getConnection();
+          Statement st = connection.createStatement();
+          if("".equals(emailgv.getText())){
+              JOptionPane.showMessageDialog(new JFrame(), "chưa nhập tên tài khoản","lỗi",JOptionPane.ERROR_MESSAGE);
+              
+          }else if("".equals(passwordgv.getText())){
+              JOptionPane.showMessageDialog(new JFrame(), "chưa nhập mật khẩu","lỗi",JOptionPane.ERROR_MESSAGE);
+          }else{
+            TenTK = emailgv.getText();
+            MK = passwordgv.getText();
+            query = "SELECT * FROM user_gv WHERE ten_tk = '" + TenTK + "'";
+            ResultSet rs = st.executeQuery(query);
+            while(rs.next()){
+                passDb = rs.getString("mk");
+                NotFound = 1;
+            }
+            if(NotFound == 1 && MK.equals(passDb)){       
+            GVForm GVFormFrame = new GVForm();
+            GVFormFrame.setVisible(true);
+            GVFormFrame.pack();
+            GVFormFrame.setLocationRelativeTo(null);
+        this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(new JFrame(), "Vui lòng kiểm ta lại thông tin đăng nhập ","Đăng nhập không thành công",JOptionPane.ERROR_MESSAGE);
+            }
+          
+            emailgv.setText("");
+            passwordgv.setText("");
+            
+          }
+      }catch(Exception e){
+          System.out.println("lỗi" + e.getMessage());
+      }
     }//GEN-LAST:event_btnLoginGVActionPerformed
 
 

@@ -6,11 +6,14 @@ package FormGVpanel;
 
 import FormGVpanel.TThsPanel.UserSession;
 import java.awt.Font;
+import java.io.File;
 import packageapp.DBConnection;
 import java.sql.*;
 import java.util.*;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+
 
 
 
@@ -23,38 +26,60 @@ private Connection connection;
     
     public PanelKQ() {
         initComponents();  
+
+
+
         
     }
+    
     public void KQ() {
         loadtt();
         loadtb();
 }
    private void loadtt(){
-       String Ten, query;
+       String Ten, query,img = null;
        Ten = UserSession.getUsername();
        
-       try{
-       connection = DBConnection.getConnection();
-       Statement st = connection.createStatement();
-       query = "SELECT * FROM student WHERE ten_tk = '"+Ten+"'";
-       ResultSet rs = st.executeQuery(query);
-       if(rs.next()){
-       Lbhoten.setText( rs.getString("ho_ten"));
-       Lbngaysinh.setText(rs.getString("ngay_sinh"));
-       Lblop.setText(rs.getString("lop"));
-       Lbgioitinh.setText( rs.getString("gioi_tinh"));
-       Lbemail.setText(rs.getString("email")); 
-       }
-           
-       }catch(Exception e){
-          System.out.println("loi" + e.getMessage());
-       }
+      try {
+    connection = DBConnection.getConnection();
+    query = "SELECT * FROM student WHERE ten_tk = ?";
+    PreparedStatement st = connection.prepareStatement(query);
+    st.setString(1,Ten);
+    ResultSet rs = st.executeQuery();
+
+    if (rs.next()) {
+        // Đặt các thông tin
+        Lbhoten.setText(rs.getString("ho_ten"));
+        Lbngaysinh.setText(rs.getString("ngay_sinh"));
+        Lblop.setText(rs.getString("lop"));
+        Lbemail.setText(rs.getString("email"));
+        Lbgioitinh.setText(rs.getString("gioi_tinh"));
+        img = rs.getString("avt");
+
+        // Xử lý hình ảnh
+        if (img != null && !img.isEmpty()) {
+            File imageFile = new File(img);
+            if (imageFile.exists()) {
+                imageAvatar1.setImage(new ImageIcon(img)); // Đường dẫn hợp lệ
+            } else {
+                System.out.println("Hình ảnh không tồn tại tại đường dẫn: " + img);
+            }
+        } else {
+            System.out.println("Đường dẫn ảnh trống hoặc không hợp lệ.");
+        }
+    }
+    rs.close();
+    st.close();
+    connection.close();
+
+} catch (Exception e) {
+    System.out.println("Lỗi: " + e.getMessage());
+}
    }
    
    private void loadtb(){
        String query,tentk;
        tentk = UserSession.getUsername();
-       
        try{
        connection = DBConnection.getConnection();
        Statement st = connection.createStatement();
@@ -107,78 +132,51 @@ private Connection connection;
 
         setLayout(null);
 
+        jPanel1.setLayout(null);
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Họ tên");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(329, 6, 60, 30);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Ngày sinh");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(329, 76, 70, 20);
 
         jLabel3.setText("Giới tính");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(589, 6, 60, 30);
 
         jLabel4.setText("Lớp");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(329, 140, 50, 31);
 
         jLabel5.setText("Email");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(589, 76, 60, 20);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(124, 124, 124)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(190, 190, 190)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Lblop, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(Lbngaysinh, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(Lbhoten, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))))
-                        .addGap(103, 103, 103)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Lbemail, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                            .addComponent(Lbgioitinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(366, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Lbhoten, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                    .addComponent(Lbgioitinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Lbngaysinh, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lbemail, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lblop, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
-                .addContainerGap(12, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
-        );
+        Lbhoten.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jPanel1.add(Lbhoten);
+        Lbhoten.setBounds(329, 42, 157, 28);
+
+        Lbngaysinh.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jPanel1.add(Lbngaysinh);
+        Lbngaysinh.setBounds(329, 104, 157, 27);
+
+        Lblop.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jPanel1.add(Lblop);
+        Lblop.setBounds(360, 140, 101, 31);
+
+        Lbgioitinh.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jPanel1.add(Lbgioitinh);
+        Lbgioitinh.setBounds(589, 42, 165, 28);
+
+        Lbemail.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jPanel1.add(Lbemail);
+        Lbemail.setBounds(589, 104, 220, 27);
+        jPanel1.add(imageAvatar1);
+        imageAvatar1.setBounds(57, 14, 148, 136);
 
         add(jPanel1);
         jPanel1.setBounds(0, 0, 1120, 180);

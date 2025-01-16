@@ -96,11 +96,11 @@ private String click = null;
         ComboBoxmonhoc.setBounds(640, 60, 87, 41);
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Danh sách bài tập đã tải lên");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(80, 20, 350, 60);
+        jLabel1.setBounds(40, 20, 480, 60);
 
         add(jPanel1);
         jPanel1.setBounds(0, 0, 1120, 120);

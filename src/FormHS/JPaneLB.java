@@ -143,6 +143,7 @@ private static final HashMap<Integer, String> dapandung = new HashMap<>();
                 for (int i = 1; i <= 20; i++) {
                   dapandung.put(i, rs.getString("cau" + i));
                   System.out.println("n");
+                  dapandung.put(i, rs.getString("cau" + i));
                 }
             }
         }catch(Exception e){

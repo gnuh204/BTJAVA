@@ -31,6 +31,7 @@ public class HSForm extends javax.swing.JFrame {
         jLayeredPaneFHS.add(KT);
         jLayeredPaneFHS.add(KT1);
         CNHS.setVisible(true);
+        CNHS.CN();
         BTHS.setVisible(false);
         LB.setVisible(false);
         KT.setVisible(false);
@@ -209,6 +210,7 @@ public class HSForm extends javax.swing.JFrame {
         KT.setVisible(false);
         KT1.setVisible(false);
         KT1.rsKT1();
+        CNHS.CN();
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked

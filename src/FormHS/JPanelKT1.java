@@ -72,7 +72,7 @@ private Map<Integer, String[]> questionsMap = new HashMap<>();
     private void addQpanel(String[] Qdata){
        JPanel QPanel = new JPanel();
        QPanel.setLayout(new BoxLayout(QPanel, BoxLayout.Y_AXIS));
-       QPanel.setMaximumSize(new Dimension(900, 150));
+       QPanel.setMaximumSize(new Dimension(900, 200));
        QPanel.setBorder(BorderFactory.createTitledBorder(Qdata[0]));
        ButtonGroup group = new ButtonGroup();
        JRadioButton optionA = new JRadioButton(Qdata[1]);

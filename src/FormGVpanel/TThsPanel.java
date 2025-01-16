@@ -258,6 +258,16 @@ private void loadtablehs(){
     }//GEN-LAST:event_TimKiemhsActionPerformed
 
     private void BtnxoahsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnxoahsActionPerformed
+        int overwrite = JOptionPane.showConfirmDialog(
+                    null,
+                    "Bạn có xóa không?",
+                    "Xác nhận",
+                    JOptionPane.YES_NO_OPTION
+            );
+            if (overwrite != JOptionPane.YES_OPTION) {
+                return;
+            }else{
+           
         String checkquery;
         String currentUsername = UserSession.getUsername();
            try{
@@ -269,7 +279,7 @@ private void loadtablehs(){
             loadtablehs(); 
        }catch(Exception e){
            System.out.println("Loi"+e.getMessage());
-       }  
+       } } 
     }//GEN-LAST:event_BtnxoahsActionPerformed
 
     private void BtndatlaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtndatlaiActionPerformed

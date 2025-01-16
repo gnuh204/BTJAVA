@@ -47,8 +47,8 @@ private Connection connection;
     private void loadlabel(){
         String query,query1,query2;
         query ="SELECT COUNT(*) AS total FROM student";
-        query1 = "SELECT COUNT(*) AS total FROM bai_tap";
-        query2 = "SELECT COUNT(*) AS total FROM n_hang_ch";
+        query1 = "SELECT COUNT(*) AS total1 FROM bai_tap";
+        query2 = "SELECT COUNT(*) AS total2 FROM n_hang_ch";
         try{
         connection = DBConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(query);
@@ -63,12 +63,12 @@ private Connection connection;
                 System.out.println("Số lượng bản ghi trong bảng: " + total);
             }
           if (resultSet1.next()) {
-                String total1 = resultSet.getString("total");
+                String total1 = resultSet1.getString("total1");
                 sbt.setText(total1);
                 System.out.println("Số lượng bản ghi trong bảng: " + total1);
             }
           if (resultSet2.next()) {
-                String total2 = resultSet.getString("total");
+                String total2 = resultSet2.getString("total2");
                 sch.setText(total2);
                 System.out.println("Số lượng bản ghi trong bảng: " + total2);
             }
@@ -420,7 +420,7 @@ private Connection connection;
         DSNHCH.setVisible(false);
         NHCH.setVisible(false);
         KQ.setVisible(false);
-        
+        loadlabel();
     }//GEN-LAST:event_jLabelTTHSinhMouseClicked
 
     private void jLabelTrangchuGVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTrangchuGVMouseClicked
@@ -505,13 +505,7 @@ private Connection connection;
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GVForm().setVisible(true);
-            }
-        });
-    }
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Shs;
