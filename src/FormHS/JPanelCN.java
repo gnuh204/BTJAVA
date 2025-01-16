@@ -34,6 +34,7 @@ private void loaddata(){
               ho_ten.setText(rs.getString("ho_ten"));
               ngay_thang.setText(rs.getString("ngay_sinh"));
               lop.setText(rs.getString("lop"));
+              TFemail.setText(rs.getString("email"));
               Gioi_Tinh = rs.getString("gioi_tinh");
               if ("Nam".equals(Gioi_Tinh)) {
                     jRadioNam.setSelected(true);
@@ -72,6 +73,8 @@ private void loaddata(){
         jRadioNam = new javax.swing.JRadioButton();
         jRadioNu = new javax.swing.JRadioButton();
         luu_thong_tin = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        TFemail = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(1120, 550));
@@ -132,6 +135,8 @@ private void loaddata(){
             }
         });
 
+        jLabel6.setText("Email");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,16 +153,18 @@ private void loaddata(){
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(ho_ten, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4)
-                                    .addComponent(lop, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(lop, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jRadioNam)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jRadioNu)))))
                         .addGap(109, 109, 109)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel3)
-                            .addComponent(ngay_thang, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioNam)
-                                .addGap(6, 6, 6)
-                                .addComponent(jRadioNu))))
+                            .addComponent(ngay_thang, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(jLabel6)
+                            .addComponent(TFemail)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(225, 225, 225)
                         .addComponent(luu_thong_tin, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -167,34 +174,39 @@ private void loaddata(){
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(jLabel2)
-                .addGap(12, 12, 12)
-                .addComponent(ho_ten, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
-                .addComponent(jLabel4)
-                .addGap(6, 6, 6)
-                .addComponent(lop, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(luu_thong_tin, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(109, 109, 109))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel2)
+                        .addGap(12, 12, 12)
+                        .addComponent(ho_ten, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(100, 100, 100)
                         .addComponent(jLabel3)
                         .addGap(12, 12, 12)
-                        .addComponent(ngay_thang, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71)
-                        .addComponent(jLabel5)
-                        .addGap(13, 13, 13)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioNam)
-                            .addComponent(jRadioNu)))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(ngay_thang, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TFemail, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lop, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioNam)
+                    .addComponent(jRadioNu))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(luu_thong_tin, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(109, 109, 109))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -207,11 +219,12 @@ private void loaddata(){
     }//GEN-LAST:event_lopActionPerformed
 
     private void luu_thong_tinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_luu_thong_tinActionPerformed
-      String Ho_Ten, Ngay_Thang, Lop,Gioi_Tinh = null,query,checklg;
+      String Ho_Ten, Ngay_Thang, Lop,Gioi_Tinh = null,query,Email;
       String currentUsername = UserSession.getUsername();
       Ho_Ten = ho_ten.getText();
       Ngay_Thang = ngay_thang.getText();
       Lop = lop.getText();
+      Email = TFemail.getText();
       
       if(jRadioNam.isSelected()){
           Gioi_Tinh = "Nam";
@@ -226,7 +239,7 @@ private void loaddata(){
         try{
             connection = DBConnection.getConnection();
             Statement st = connection.createStatement();
-            query = "UPDATE `student` SET `ho_ten` ='"+Ho_Ten+"', `ngay_sinh` = '"+Ngay_Thang+"', `lop` ='"+Lop+"', `gioi_tinh` = '"+Gioi_Tinh+"' WHERE `student`.`ten_tk` = '"+currentUsername+"'";
+            query = "UPDATE `student` SET `ho_ten` ='"+Ho_Ten+"', `ngay_sinh` = '"+Ngay_Thang+"', `lop` ='"+Lop+"', `gioi_tinh` = '"+Gioi_Tinh+"',email = '"+Email+"' WHERE `student`.`ten_tk` = '"+currentUsername+"'";
             st.execute(query);
             showMessageDialog(null,"Cập nhật thông tin thành công");
        }catch(Exception e){
@@ -240,6 +253,7 @@ private void loaddata(){
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField TFemail;
     private javax.swing.ButtonGroup buttonGroup;
     private javax.swing.JTextField ho_ten;
     private javax.swing.JLabel jLabel1;
@@ -247,6 +261,7 @@ private void loaddata(){
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioNam;
     private javax.swing.JRadioButton jRadioNu;

@@ -14,16 +14,18 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import packageapp.DBConnection;
+import packageapp.Login.UserSession;
 
 
 public class JPaneLB extends javax.swing.JPanel {
 private static Connection connection;
 private static final HashMap<Integer, String> answers = new HashMap<>();
-private static final HashMap<Integer, String> dapandung = new HashMap<>();; 
+private static final HashMap<Integer, String> dapandung = new HashMap<>();
+
   
     public JPaneLB() {
         initComponents();
-       
+      
         
         
     }
@@ -59,10 +61,17 @@ private static final HashMap<Integer, String> dapandung = new HashMap<>();;
             File file = new File(lkbt);
             PDDocument document = Loader.loadPDF(file);
             PDFRenderer renderer = new PDFRenderer(document);
-            BufferedImage image = renderer.renderImage(0); 
-            JLabel pdfLabel = new JLabel(new ImageIcon(image));
-            JScrollPane pdfScrollPane = new JScrollPane(pdfLabel);
-            pdfPanel.add(pdfScrollPane, BorderLayout.CENTER);
+            JPanel pagesPanel = new JPanel();
+            pagesPanel.setLayout(new BoxLayout(pagesPanel, BoxLayout.Y_AXIS));
+             for (int i = 0; i < document.getNumberOfPages(); i++) {
+            BufferedImage pageImage = renderer.renderImage(i);
+            JLabel pageLabel = new JLabel(new ImageIcon(pageImage));
+            pagesPanel.add(pageLabel); // Thêm từng trang vào JPanel
+        }
+
+        // Bọc pagesPanel bằng JScrollPane để hỗ trợ cuộn
+        JScrollPane pdfScrollPane = new JScrollPane(pagesPanel);
+        pdfPanel.add(pdfScrollPane, BorderLayout.CENTER);
             document.close();
         } catch (Exception e) {
             pdfPanel.add(new JLabel("Không thể tải PDF"), BorderLayout.CENTER);
@@ -120,6 +129,7 @@ private static final HashMap<Integer, String> dapandung = new HashMap<>();;
     public static HashMap<Integer,String> Dapandung(){
         String ten = JPanelBTHS.BaiKT.getTen();
         String mon = JPanelBTHS.BaiKT.getMonhoc();
+        
         String query;
         try{
           connection = DBConnection.getConnection();
@@ -141,12 +151,14 @@ private static final HashMap<Integer, String> dapandung = new HashMap<>();;
         return dapandung;
     }
     private static void gradeQuiz() {
-        
-
         double score = 0;
         ArrayList<Integer> unansweredQuestions = new ArrayList<>();
-         HashMap<Integer, String> dapandung = Dapandung();
-
+        HashMap<Integer, String> dapandung = Dapandung();
+        String ten = JPanelBTHS.BaiKT.getTen();
+        String mon = JPanelBTHS.BaiKT.getMonhoc(); 
+        String tk = UserSession.getUsername();
+        try{
+            connection = DBConnection.getConnection();
         // Duyệt qua tất cả các câu hỏi
         for (int question : dapandung.keySet()) {
             if (!answers.containsKey(question)) {
@@ -158,19 +170,44 @@ private static final HashMap<Integer, String> dapandung = new HashMap<>();;
 
         // Hiển thị kết quả
         StringBuilder resultMessage = new StringBuilder();
-        resultMessage.append("Điểm số của bạn: ").append(score).append("/").append(dapandung.size()).append("\n");
+        resultMessage.append("Điểm số của bạn: ").append(score).append("/").append("10\n");
+        String selectQuery = "SELECT id FROM bai_tap WHERE ten_bt = ? AND ten_mh = ?";
+        PreparedStatement selectstmt = connection.prepareStatement(selectQuery);
+        selectstmt.setString(1, ten);
+        selectstmt.setString(2, mon);
+        ResultSet rs = selectstmt.executeQuery();
+        int studentId = 0;
+        if (rs.next()) {
+        studentId = rs.getInt("id");  // Lấy ID của học sinh từ kết quả
+        }
+        
+        String query = "UPDATE student_bai_tap SET trang_thai = ?, ngay_nop = CURRENT_DATE WHERE ten_tk = ? AND bai_tap_id = ?";
+        PreparedStatement stmt = connection.prepareStatement(query);
+        stmt.setString(1, score + "|10");  // Gán giá trị cho trang_thai
+        stmt.setString(2,tk);  // Gán giá trị cho ten_tk
+        stmt.setInt(3,studentId);  // Gán giá trị cho bai_tap_id
+        
+        stmt.executeUpdate();
 
         if (!unansweredQuestions.isEmpty()) {
             resultMessage.append("Các câu hỏi chưa trả lời: ");
             for (int question : unansweredQuestions) {
-                resultMessage.append(question).append(" ");
+                resultMessage.append(question).append(" "
+                        + " "
+                        + " "
+                        + " ");
             }
         } else {
             resultMessage.append("Bạn đã trả lời tất cả các câu hỏi.");
         }
 
         JOptionPane.showMessageDialog(null, resultMessage.toString(), "Kết quả bài kiểm tra", JOptionPane.INFORMATION_MESSAGE);
+    
+    }catch(Exception e){
+        System.out.println("loi" + e.getMessage());
     }
+    
+}
 
      
    

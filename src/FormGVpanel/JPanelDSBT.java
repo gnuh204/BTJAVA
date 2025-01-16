@@ -64,7 +64,7 @@ private String click = null;
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setLayout(null);
         jPanel1.add(jTextField1);
-        jTextField1.setBounds(453, 7, 188, 41);
+        jTextField1.setBounds(540, 10, 188, 41);
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setText("Tìm Kiếm");
@@ -74,7 +74,7 @@ private String click = null;
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(659, 6, 104, 41);
+        jButton1.setBounds(760, 10, 104, 41);
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setText("Xóa");
@@ -84,7 +84,7 @@ private String click = null;
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(659, 61, 103, 40);
+        jButton2.setBounds(760, 60, 103, 40);
 
         ComboBoxmonhoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán", "Tiếng Việt", "Khoa học" }));
         ComboBoxmonhoc.addActionListener(new java.awt.event.ActionListener() {
@@ -93,17 +93,17 @@ private String click = null;
             }
         });
         jPanel1.add(ComboBoxmonhoc);
-        ComboBoxmonhoc.setBounds(569, 61, 87, 41);
+        ComboBoxmonhoc.setBounds(640, 60, 87, 41);
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Danh sách bài tập đã tải lên");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(50, 20, 350, 60);
+        jLabel1.setBounds(80, 20, 350, 60);
 
         add(jPanel1);
-        jPanel1.setBounds(0, 0, 800, 120);
+        jPanel1.setBounds(0, 0, 1120, 120);
 
         jScrollPane1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -127,7 +127,7 @@ private String click = null;
         jScrollPane1.setViewportView(jTable1);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(30, 140, 720, 520);
+        jScrollPane1.setBounds(30, 140, 1060, 520);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

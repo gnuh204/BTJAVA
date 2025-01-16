@@ -69,7 +69,7 @@ private String click = null;
         jScrollPane1 = new javax.swing.JScrollPane();
         Tablenhch = new javax.swing.JTable();
 
-        setPreferredSize(new java.awt.Dimension(800, 750));
+        setPreferredSize(new java.awt.Dimension(1120, 750));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 750));
         jPanel1.setLayout(null);
@@ -85,27 +85,27 @@ private String click = null;
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(288, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(439, 439, 439)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(283, 283, 283))
+                .addContainerGap(452, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 0, 800, 110);
+        jPanel2.setBounds(0, 0, 1120, 110);
         jPanel1.add(jTextField1);
-        jTextField1.setBounds(480, 130, 180, 40);
+        jTextField1.setBounds(570, 130, 180, 40);
 
         jButton1.setText("Tìm Kiếm");
         jPanel1.add(jButton1);
-        jButton1.setBounds(670, 130, 90, 40);
+        jButton1.setBounds(760, 130, 90, 40);
 
         jButtonThemNHCH.setText("Thêm");
         jButtonThemNHCH.addActionListener(new java.awt.event.ActionListener() {
@@ -114,11 +114,11 @@ private String click = null;
             }
         });
         jPanel1.add(jButtonThemNHCH);
-        jButtonThemNHCH.setBounds(260, 640, 90, 40);
+        jButtonThemNHCH.setBounds(400, 640, 90, 40);
 
         jButton3.setText("Sửa");
         jPanel1.add(jButton3);
-        jButton3.setBounds(370, 640, 90, 40);
+        jButton3.setBounds(510, 640, 90, 40);
 
         Xoabtn.setText("Xóa");
         Xoabtn.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +127,7 @@ private String click = null;
             }
         });
         jPanel1.add(Xoabtn);
-        Xoabtn.setBounds(480, 640, 90, 40);
+        Xoabtn.setBounds(620, 640, 90, 40);
 
         Tablenhch.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -140,6 +140,7 @@ private String click = null;
                 "Nội Dung", "Môn", "Đáp án A", "Đáp án B", "Đáp án C", "Đáp án D", "Đáp án đúng"
             }
         ));
+        Tablenhch.setSelectionBackground(new java.awt.Color(255, 255, 255));
         Tablenhch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TablenhchMouseClicked(evt);
@@ -151,15 +152,13 @@ private String click = null;
         }
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(30, 200, 740, 430);
+        jScrollPane1.setBounds(30, 200, 1060, 430);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1120, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

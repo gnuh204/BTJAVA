@@ -9,36 +9,74 @@ import FormGVpanel.JPanelDSBT;
 import FormGVpanel.JPanelDSNHCH;
 import FormGVpanel.TThsPanel;
 import FormGVpanel.JPanelNHCH;
-
+import FormGVpanel.PanelKQ;
+import java.sql.*;
+import javax.swing.JOptionPane;
 
 
 public class GVForm extends javax.swing.JFrame {
-
+private Connection connection;
     JPanelNHCH NHCH = new JPanelNHCH();
     TThsPanel TThs = new TThsPanel();
     JPanelBT BT = new JPanelBT();
     JPanelDSBT DSBT = new JPanelDSBT();
     JPanelDSNHCH DSNHCH = new JPanelDSNHCH();
+    PanelKQ KQ = new PanelKQ();
     
     
     public GVForm() {
         initComponents();
-        
+        loadlabel();
         
         jLayeredPaneGV.add(TThs);
         jLayeredPaneGV.add(BT);
         jLayeredPaneGV.add(DSBT);
         jLayeredPaneGV.add(DSNHCH);
         jLayeredPaneGV.add(NHCH);
+        jLayeredPaneGV.add(KQ);
         TThs.setVisible(false);
         BT.setVisible(false);
         DSBT.setVisible(false);
         DSNHCH.setVisible(false);
         NHCH.setVisible(false);
+        KQ.setVisible(false);
        // nut them
         DSNHCH.setButtonListener(e -> onButtonThemNHCH());
+        TThs.btnxemListener(e -> onxembtn());
     }
-
+    private void loadlabel(){
+        String query,query1,query2;
+        query ="SELECT COUNT(*) AS total FROM student";
+        query1 = "SELECT COUNT(*) AS total FROM bai_tap";
+        query2 = "SELECT COUNT(*) AS total FROM n_hang_ch";
+        try{
+        connection = DBConnection.getConnection();
+        PreparedStatement statement = connection.prepareStatement(query);
+        PreparedStatement statement1 = connection.prepareStatement(query1);
+        PreparedStatement statement2 = connection.prepareStatement(query2);
+        ResultSet resultSet = statement.executeQuery();
+        ResultSet resultSet1 = statement1.executeQuery();
+        ResultSet resultSet2 = statement2.executeQuery();
+         if (resultSet.next()) {
+                String total = resultSet.getString("total");
+                Shs.setText(total);
+                System.out.println("Số lượng bản ghi trong bảng: " + total);
+            }
+          if (resultSet1.next()) {
+                String total1 = resultSet.getString("total");
+                sbt.setText(total1);
+                System.out.println("Số lượng bản ghi trong bảng: " + total1);
+            }
+          if (resultSet2.next()) {
+                String total2 = resultSet.getString("total");
+                sch.setText(total2);
+                System.out.println("Số lượng bản ghi trong bảng: " + total2);
+            }
+          
+        }catch(Exception e){
+           System.out.println("loi"+ e.getMessage());
+        }
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -46,35 +84,33 @@ public class GVForm extends javax.swing.JFrame {
 
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jLabelTTHSinh = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabelTrangchuGV = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabelBTGV = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jLabelDSBTGV = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
         jLabelNHCH_GV = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLayeredPaneGV = new javax.swing.JLayeredPane();
         TCPanel = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        Shs = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
+        sbt = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
+        sch = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 800));
+        setPreferredSize(new java.awt.Dimension(1320, 800));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jPanel3.setBackground(new java.awt.Color(51, 102, 255));
@@ -82,57 +118,23 @@ public class GVForm extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/recent_app_icon.png"))); // NOI18N
 
-        jPanel6.setBackground(new java.awt.Color(0, 102, 255));
-        jPanel6.setPreferredSize(new java.awt.Dimension(200, 50));
-
-        jLabel3.setBackground(new java.awt.Color(0, 102, 255));
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/arrow_return_icon.png"))); // NOI18N
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 822, Short.MAX_VALUE)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(1272, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jLabel2)
+                .addGap(0, 2, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3);
-        jPanel3.setBounds(0, 0, 1000, 50);
+        jPanel3.setBounds(0, 0, 1320, 50);
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 102));
         jPanel2.setPreferredSize(new java.awt.Dimension(200, 750));
@@ -166,7 +168,7 @@ public class GVForm extends javax.swing.JFrame {
         );
 
         jPanel2.add(jPanel10);
-        jPanel10.setBounds(0, 120, 200, 50);
+        jPanel10.setBounds(0, 90, 200, 50);
 
         jPanel9.setBackground(new java.awt.Color(0, 102, 102));
         jPanel9.setPreferredSize(new java.awt.Dimension(200, 50));
@@ -198,33 +200,6 @@ public class GVForm extends javax.swing.JFrame {
         jPanel2.add(jPanel9);
         jPanel9.setBounds(0, 40, 200, 50);
 
-        jPanel7.setBackground(new java.awt.Color(0, 102, 102));
-        jPanel7.setPreferredSize(new java.awt.Dimension(200, 50));
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/account_icon.png"))); // NOI18N
-        jLabel6.setText("Thông tin học sinh");
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 20, Short.MAX_VALUE))
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        jPanel2.add(jPanel7);
-        jPanel7.setBounds(0, 120, 200, 50);
-
         jPanel11.setBackground(new java.awt.Color(0, 102, 102));
         jPanel11.setPreferredSize(new java.awt.Dimension(200, 50));
 
@@ -253,7 +228,7 @@ public class GVForm extends javax.swing.JFrame {
         );
 
         jPanel2.add(jPanel11);
-        jPanel11.setBounds(0, 170, 200, 50);
+        jPanel11.setBounds(0, 140, 200, 50);
 
         jPanel14.setBackground(new java.awt.Color(0, 102, 102));
         jPanel14.setPreferredSize(new java.awt.Dimension(200, 50));
@@ -283,7 +258,7 @@ public class GVForm extends javax.swing.JFrame {
         );
 
         jPanel2.add(jPanel14);
-        jPanel14.setBounds(0, 220, 200, 50);
+        jPanel14.setBounds(0, 190, 200, 50);
 
         jPanel15.setBackground(new java.awt.Color(0, 102, 102));
         jPanel15.setPreferredSize(new java.awt.Dimension(200, 50));
@@ -313,12 +288,23 @@ public class GVForm extends javax.swing.JFrame {
         );
 
         jPanel2.add(jPanel15);
-        jPanel15.setBounds(0, 270, 200, 50);
+        jPanel15.setBounds(0, 240, 200, 50);
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 51, 0));
+        jButton1.setText("Đăng xuất");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1);
+        jButton1.setBounds(40, 630, 110, 40);
 
         getContentPane().add(jPanel2);
         jPanel2.setBounds(0, 50, 200, 746);
 
-        jLayeredPaneGV.setPreferredSize(new java.awt.Dimension(800, 750));
+        jLayeredPaneGV.setPreferredSize(new java.awt.Dimension(1120, 750));
         jLayeredPaneGV.setLayout(new java.awt.CardLayout());
 
         TCPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -327,9 +313,8 @@ public class GVForm extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(255, 153, 0));
         jPanel5.setPreferredSize(new java.awt.Dimension(200, 150));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/school_students_icon.png"))); // NOI18N
-        jLabel1.setText("1");
+        Shs.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        Shs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/school_students_icon.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -337,26 +322,24 @@ public class GVForm extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addComponent(Shs, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jLabel1)
+                .addComponent(Shs)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         TCPanel.add(jPanel5);
-        jPanel5.setBounds(30, 86, 200, 150);
+        jPanel5.setBounds(90, 80, 200, 150);
 
         jPanel12.setBackground(new java.awt.Color(255, 153, 0));
         jPanel12.setPreferredSize(new java.awt.Dimension(200, 150));
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/school_material_ruler_pnecil_notebook_icon.png"))); // NOI18N
-        jLabel10.setText("1");
+        sbt.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        sbt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/school_material_ruler_pnecil_notebook_icon.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -364,26 +347,24 @@ public class GVForm extends javax.swing.JFrame {
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel10)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addComponent(sbt, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jLabel10)
+                .addComponent(sbt)
                 .addContainerGap(51, Short.MAX_VALUE))
         );
 
         TCPanel.add(jPanel12);
-        jPanel12.setBounds(300, 86, 200, 150);
+        jPanel12.setBounds(440, 80, 200, 150);
 
         jPanel13.setBackground(new java.awt.Color(255, 153, 0));
         jPanel13.setPreferredSize(new java.awt.Dimension(200, 150));
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/extract_certificate_document_excellence_icon.png"))); // NOI18N
-        jLabel11.setText("1");
+        sch.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        sch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/extract_certificate_document_excellence_icon.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -391,39 +372,39 @@ public class GVForm extends javax.swing.JFrame {
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel11)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addComponent(sch, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jLabel11)
+                .addGap(22, 22, 22)
+                .addComponent(sch, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(50, Short.MAX_VALUE))
         );
 
         TCPanel.add(jPanel13);
-        jPanel13.setBounds(570, 86, 200, 150);
+        jPanel13.setBounds(770, 80, 200, 150);
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel12.setText("Số học sinh");
         TCPanel.add(jLabel12);
-        jLabel12.setBounds(30, 42, 130, 32);
+        jLabel12.setBounds(90, 40, 130, 32);
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel13.setText("Bài tập");
         TCPanel.add(jLabel13);
-        jLabel13.setBounds(300, 42, 79, 32);
+        jLabel13.setBounds(440, 40, 79, 32);
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel14.setText("Câi hỏi đã tạo");
+        jLabel14.setText("Câu hỏi đã tạo");
         TCPanel.add(jLabel14);
-        jLabel14.setBounds(570, 42, 157, 32);
+        jLabel14.setBounds(770, 40, 165, 32);
 
         jLayeredPaneGV.add(TCPanel, "card2");
 
         getContentPane().add(jLayeredPaneGV);
-        jLayeredPaneGV.setBounds(200, 50, 790, 750);
+        jLayeredPaneGV.setBounds(200, 50, 1120, 750);
 
         getAccessibleContext().setAccessibleName("FormGV");
 
@@ -438,6 +419,7 @@ public class GVForm extends javax.swing.JFrame {
         DSBT.setVisible(false);
         DSNHCH.setVisible(false);
         NHCH.setVisible(false);
+        KQ.setVisible(false);
         
     }//GEN-LAST:event_jLabelTTHSinhMouseClicked
 
@@ -448,6 +430,7 @@ public class GVForm extends javax.swing.JFrame {
         DSBT.setVisible(false);
         DSNHCH.setVisible(false);
         NHCH.setVisible(false);
+        KQ.setVisible(false);
     }//GEN-LAST:event_jLabelTrangchuGVMouseClicked
 
     private void jLabelBTGVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBTGVMouseClicked
@@ -457,6 +440,7 @@ public class GVForm extends javax.swing.JFrame {
         DSBT.setVisible(false);
         DSNHCH.setVisible(false);
         NHCH.setVisible(false);
+        KQ.setVisible(false);
     }//GEN-LAST:event_jLabelBTGVMouseClicked
 
     private void jLabelDSBTGVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDSBTGVMouseClicked
@@ -466,6 +450,7 @@ public class GVForm extends javax.swing.JFrame {
         DSBT.setVisible(true);
         DSNHCH.setVisible(false);
         NHCH.setVisible(false);
+        KQ.setVisible(false);
         DSBT.load();
     }//GEN-LAST:event_jLabelDSBTGVMouseClicked
     
@@ -476,6 +461,7 @@ public class GVForm extends javax.swing.JFrame {
         DSBT.setVisible(false);
         DSNHCH.setVisible(true);
         NHCH.setVisible(false);
+        KQ.setVisible(false);
         DSNHCH.loadtable();
     }//GEN-LAST:event_jLabelNHCH_GVMouseClicked
     
@@ -486,16 +472,37 @@ public class GVForm extends javax.swing.JFrame {
        DSBT.setVisible(false);
        DSNHCH.setVisible(false);
        NHCH.setVisible(true);
+       KQ.setVisible(false);
        
     }
+     private void onxembtn(){
+       TCPanel.setVisible(false);
+       TThs.setVisible(false);
+       BT.setVisible(false);
+       DSBT.setVisible(false);
+       DSNHCH.setVisible(false);
+       NHCH.setVisible(false);
+       KQ.setVisible(true);
+       KQ.KQ();
+     }
     
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-    Login LoginFrame = new Login();
-    LoginFrame.setVisible(true);
-    LoginFrame.pack();
-    LoginFrame.setLocationRelativeTo(null);
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int overwrite = JOptionPane.showConfirmDialog(
+                    null,
+                    "Bạn có muốn đăng xuất không?",
+                    "Xác nhận",
+                    JOptionPane.YES_NO_OPTION
+            );
+            if (overwrite != JOptionPane.YES_OPTION) {
+                return;
+            }else{
+           Login LoginFrame = new Login();
+           LoginFrame.setVisible(true);
+           LoginFrame.pack();
+           LoginFrame.setLocationRelativeTo(null);
     this.dispose();
-    }//GEN-LAST:event_jLabel3MouseClicked
+            }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     public static void main(String args[]) {
@@ -507,16 +514,13 @@ public class GVForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Shs;
     private javax.swing.JPanel TCPanel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelBTGV;
     private javax.swing.JLabel jLabelDSBTGV;
     private javax.swing.JLabel jLabelNHCH_GV;
@@ -532,8 +536,8 @@ public class GVForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel sbt;
+    private javax.swing.JLabel sch;
     // End of variables declaration//GEN-END:variables
 }

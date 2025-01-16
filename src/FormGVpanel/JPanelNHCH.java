@@ -47,7 +47,7 @@ private  Connection connection;
         jLabel2.setText("jLabel2");
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(800, 750));
+        setPreferredSize(new java.awt.Dimension(1120, 750));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 750));
         jPanel1.setLayout(null);
@@ -65,7 +65,7 @@ private  Connection connection;
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(302, 302, 302)
                 .addComponent(jLabel1)
-                .addContainerGap(329, Short.MAX_VALUE))
+                .addContainerGap(649, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -76,7 +76,7 @@ private  Connection connection;
         );
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 0, 800, 60);
+        jPanel2.setBounds(0, 0, 1120, 60);
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -85,7 +85,7 @@ private  Connection connection;
         jScrollPane1.setViewportView(TextArea_ch);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(150, 140, 500, 90);
+        jScrollPane1.setBounds(300, 140, 500, 90);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setText("Nội dung câu hỏi:");
@@ -95,44 +95,44 @@ private  Connection connection;
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel3.setText("Đáp án:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(30, 270, 100, 30);
+        jLabel3.setBounds(40, 270, 100, 30);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Đáp án B:");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(440, 340, 70, 40);
+        jLabel5.setBounds(630, 340, 70, 40);
         jPanel1.add(TFb);
-        TFb.setBounds(510, 340, 160, 40);
+        TFb.setBounds(700, 340, 160, 40);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Đáp án D:");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(440, 440, 70, 40);
+        jLabel6.setBounds(630, 440, 70, 40);
         jPanel1.add(TFd);
-        TFd.setBounds(510, 450, 160, 40);
+        TFd.setBounds(700, 440, 160, 40);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Đáp án A:");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(70, 340, 70, 40);
+        jLabel7.setBounds(220, 340, 70, 40);
         jPanel1.add(TFa);
-        TFa.setBounds(140, 340, 160, 40);
+        TFa.setBounds(290, 340, 160, 40);
         jPanel1.add(TFc);
-        TFc.setBounds(140, 440, 160, 40);
+        TFc.setBounds(290, 440, 160, 40);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setText("Đáp án C:");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(70, 440, 70, 40);
+        jLabel8.setBounds(220, 440, 70, 40);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel9.setText("Đáp án đúng:");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(30, 510, 160, 40);
+        jLabel9.setBounds(40, 510, 160, 40);
 
         ComboBoxdap_an.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C", "D" }));
         jPanel1.add(ComboBoxdap_an);
-        ComboBoxdap_an.setBounds(200, 510, 100, 40);
+        ComboBoxdap_an.setBounds(230, 510, 100, 40);
 
         btn_luu.setText("Lưu");
         btn_luu.addActionListener(new java.awt.event.ActionListener() {
@@ -141,28 +141,26 @@ private  Connection connection;
             }
         });
         jPanel1.add(btn_luu);
-        btn_luu.setBounds(610, 620, 120, 50);
+        btn_luu.setBounds(860, 620, 120, 50);
 
         jButton2.setText("Làm mới");
         jPanel1.add(jButton2);
-        jButton2.setBounds(490, 620, 100, 50);
+        jButton2.setBounds(740, 620, 100, 50);
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel10.setText("Môn:");
         jPanel1.add(jLabel10);
-        jLabel10.setBounds(470, 510, 70, 40);
+        jLabel10.setBounds(650, 510, 70, 40);
 
         ComboBoxmh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toán", "Tiếng Việt", "Khoa Học" }));
         jPanel1.add(ComboBoxmh);
-        ComboBoxmh.setBounds(540, 510, 100, 40);
+        ComboBoxmh.setBounds(720, 510, 100, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1120, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -9,6 +9,7 @@ import FormHS.JPanelCN;
 import FormHS.JPanelKT;
 import FormHS.JPanelBTHS;
 import FormHS.JPanelKT1;
+import javax.swing.JOptionPane;
 
 
 
@@ -54,10 +55,11 @@ public class HSForm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLayeredPaneFHS = new javax.swing.JLayeredPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1270, 640));
+        setPreferredSize(new java.awt.Dimension(1265, 640));
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 255));
@@ -148,7 +150,7 @@ public class HSForm extends javax.swing.JFrame {
         );
 
         jPanel2.add(jPanel4);
-        jPanel4.setBounds(0, 160, 130, 55);
+        jPanel4.setBounds(0, 120, 130, 55);
 
         jPanel6.setBackground(new java.awt.Color(0, 102, 102));
 
@@ -177,7 +179,18 @@ public class HSForm extends javax.swing.JFrame {
         );
 
         jPanel2.add(jPanel6);
-        jPanel6.setBounds(0, 100, 130, 60);
+        jPanel6.setBounds(0, 60, 130, 60);
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(204, 0, 0));
+        jButton1.setText("Đăng xuất");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1);
+        jButton1.setBounds(10, 470, 110, 40);
 
         getContentPane().add(jPanel2);
         jPanel2.setBounds(0, 50, 130, 550);
@@ -194,6 +207,8 @@ public class HSForm extends javax.swing.JFrame {
         BTHS.setVisible(false);
         LB.setVisible(false);
         KT.setVisible(false);
+        KT1.setVisible(false);
+        KT1.rsKT1();
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
@@ -201,6 +216,9 @@ public class HSForm extends javax.swing.JFrame {
         BTHS.setVisible(true);
         LB.setVisible(false);
         KT.setVisible(false);
+        KT1.setVisible(false);
+        KT1.rsKT1();
+        
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
@@ -208,13 +226,36 @@ public class HSForm extends javax.swing.JFrame {
         BTHS.setVisible(false);
         LB.setVisible(false);
         KT.setVisible(true);
+        KT1.setVisible(false);
+        KT1.rsKT1();
     }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+     int overwrite = JOptionPane.showConfirmDialog(
+                    null,
+                    "Bạn có muốn đăng xuất không?",
+                    "Xác nhận",
+                    JOptionPane.YES_NO_OPTION
+            );
+            if (overwrite != JOptionPane.YES_OPTION) {
+                return;
+            }else{
+           Login LoginFrame = new Login();
+           LoginFrame.setVisible(true);
+           LoginFrame.pack();
+           LoginFrame.setLocationRelativeTo(null);
+    this.dispose();
+            }
+                
+    }//GEN-LAST:event_jButton1ActionPerformed
     private void onLam_bai(){
         
         CNHS.setVisible(false);
         BTHS.setVisible(false);
         LB.setVisible(true);
         KT.setVisible(false);
+        KT1.setVisible(false);
+        KT1.rsKT1();
         LB.loadBT();
         
     }
@@ -224,6 +265,7 @@ public class HSForm extends javax.swing.JFrame {
         LB.setVisible(false);
         KT.setVisible(false);
         KT1.setVisible(true);
+        KT1.rsKT1();
         KT.bntKT();
         KT1.KT1();  
     }
@@ -232,6 +274,7 @@ public class HSForm extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
